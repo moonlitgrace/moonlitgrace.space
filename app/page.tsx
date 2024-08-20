@@ -1,7 +1,7 @@
-import HomeIcon from "@/components/icons/home";
+import Image from "next/image";
 
 export default function Home() {
-  return (
-    <HomeIcon variant="outline" />
-  );
+  return <div className="flex">
+    <Image src={"/moonlitgrace-art.svg"} alt="" width={0} height={0} className="w-full" />
+  </div>;
 }

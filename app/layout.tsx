@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(
-        "dark container min-h-screen font-sans antialiased",
+        "dark container min-h-screen font-sans antialiased flex",
         fontSans.variable
       )}>{children}</body>
     </html>
