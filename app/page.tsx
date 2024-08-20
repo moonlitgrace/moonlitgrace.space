@@ -1,7 +1,7 @@
-import Icon from "@/components/ui/icon";
+import HomeIcon from "@/components/icons/home";
 
 export default function Home() {
   return (
-    <Icon name="house" className="md:size-5" />
+    <HomeIcon variant="outline" />
   );
 }
