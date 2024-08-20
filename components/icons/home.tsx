@@ -1,7 +1,6 @@
 import { IconProps } from "@/interfaces/icon";
-import React from "react";
 
-const HomeIcon = ({ variant, ...props }: IconProps): React.JSX.Element => {
+const HomeIcon = ({ variant, ...props }: IconProps) => {
   if (variant === "solid") {
     return <>
       <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
