@@ -35,6 +35,7 @@ const Navbar = () => {
       [key: string]: {
         link: string;
         icon: ({ variant, ...props }: IconProps) => React.JSX.Element;
+        label: string;
       }
     }
   } = {
@@ -52,17 +53,19 @@ const Navbar = () => {
       photos: {
         href: '/photos',
         icon: PhotoIcon,
-        label: 'Photo'
+        label: 'Photos'
       }
     },
     socials: {
       github: {
         link: 'https://github.com/moonlitgrace',
-        icon: GithubIcon
+        icon: GithubIcon,
+        label: 'See me projects!'
       },
       mail: {
         link: 'mailto:moonlitgrace.gaia@gmail.com',
-        icon: MailIcon
+        icon: MailIcon,
+        label: 'Mail me!'
       }
     }
   }
@@ -89,14 +92,21 @@ const Navbar = () => {
         ))}
         <Separator orientation="vertical" className="h-10" />
         {Object.values(MAPPING.socials).map((item, idx) => (
-          <Button key={idx} asChild variant={'ghost'} className={"grid place-items-center rounded-xl size-11 aspect-square"}>
-            <a href={item.link} target="_blank">
-              {React.createElement(item.icon, {
-                variant: 'outline',
-                className: 'size-5'
-              })}
-            </a>
-          </Button>
+          <Tooltip key={idx}>
+            <TooltipTrigger asChild>
+              <Button key={idx} asChild variant={'ghost'} className={"grid place-items-center rounded-xl size-11 aspect-square"}>
+                <a href={item.link} target="_blank">
+                  {React.createElement(item.icon, {
+                    variant: 'outline',
+                    className: 'size-5'
+                  })}
+                </a>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent sideOffset={15}>
+              <p>{item.label}</p>
+            </TooltipContent>
+          </Tooltip>
         ))}
         <Separator orientation="vertical" className="h-10" />
         <Tooltip>
