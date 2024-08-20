@@ -1,7 +1,7 @@
-import Image from "next/image";
+import MoonlitGraceArt from "@/components/MoonlitGraceArt";
 
 export default function Home() {
-  return <div className="flex">
-    <Image src={"/moonlitgrace-art.svg"} alt="" width={0} height={0} className="w-full" />
+  return <div className="w-full grid place-items-center">
+    <MoonlitGraceArt />
   </div>;
 }
