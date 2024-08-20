@@ -12,13 +12,23 @@ import {
 } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { IconProps } from "@/interfaces/icon";
 
 const Navbar = () => {
   const pathname = usePathname();
 
-  const MAPPING = {
+  const MAPPING: {
+    links: {
+      [key: string]: {
+        href: string;
+        icon: ({ variant, ...props }: IconProps) => React.JSX.Element;
+        label: string;
+      }
+    }
+  } = {
     links: {
       home: {
+        href: '/',
         icon: HomeIcon,
         label: "Home"
       }
@@ -31,8 +41,8 @@ const Navbar = () => {
         <TooltipProvider key={idx}>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button asChild variant={pathname === '/' ? 'default' : 'ghost'} className={"grid place-items-center rounded-xl size-full aspect-square"}>
-                <Link href={'/'}>
+              <Button asChild variant={pathname === item.href ? 'default' : 'ghost'} className={"grid place-items-center rounded-xl size-full aspect-square"}>
+                <Link href={item.href}>
                   {React.createElement(item.icon, {
                     variant: pathname === '/' ? 'solid' : 'outline',
                     className: 'size-5'
