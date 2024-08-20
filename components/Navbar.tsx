@@ -13,12 +13,12 @@ import {
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { IconProps } from "@/interfaces/icon";
-import PencilIcon from "./icons/pencil";
-import PhotoIcon from "./icons/photo";
-import GithubIcon from "./icons/github";
-import MailIcon from "./icons/mail";
-import { Separator } from "./ui/separator";
-import LightIcon from "./icons/light";
+import PencilIcon from "@/components/icons/pencil";
+import PhotoIcon from "@/components/icons/photo";
+import GithubIcon from "@/components/icons/github";
+import MailIcon from "@/components/icons/mail";
+import { Separator } from "@/components/ui/separator";
+import LightIcon from "@/components/icons/light";
 
 const Navbar = () => {
   const pathname = usePathname();
