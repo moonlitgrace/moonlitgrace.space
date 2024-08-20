@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 
 // Styles
 import "@/styles/globals.css";
+import Navbar from "@/components/Navbar";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,7 +26,10 @@ export default function RootLayout({
       <body className={cn(
         "dark container min-h-screen font-sans antialiased flex",
         fontSans.variable
-      )}>{children}</body>
+      )}>
+        {children}
+        <Navbar />
+      </body>
     </html>
   );
 }
