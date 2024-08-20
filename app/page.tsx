@@ -1,5 +1,7 @@
+import Icon from "@/components/ui/icon";
+
 export default function Home() {
   return (
-    "moonlitspace"
+    <Icon name="house" className="md:size-5" />
   );
 }
