@@ -1,8 +1,4 @@
-import { SVGAttributes } from "react";
-
-interface IconProps extends SVGAttributes<SVGElement> {
-  variant: "solid" | "outline";
-}
+import { IconProps } from "@/interfaces/icon";
 
 const HomeIcon = ({ variant, ...props }: IconProps) => {
   if (variant === "outline") {
