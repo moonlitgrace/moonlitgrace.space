@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function Thoughts() {
   return (
-    <main className="w-full flex flex-col gap-10 mt-10">
+    <>
       <h2 className="text-3xl font-bold">Thoughts.</h2>
       <div className="flex flex-col gap-5">
         {MOCK_DATA.map((item) => (
@@ -43,6 +43,6 @@ export default function Thoughts() {
           </div>
         ))}
       </div>
-    </main>
+    </>
   )
 }
