@@ -56,7 +56,7 @@ const Navbar = () => {
 
   return (
     <TooltipProvider delayDuration={500}>
-      <div className="fixed left-1/2 transform -translate-x-1/2 bottom-10 flex items-center gap-2 border rounded-2xl p-2">
+      <div className="fixed z-20 left-1/2 transform -translate-x-1/2 bottom-10 bg-background flex items-center gap-2 border rounded-2xl p-2">
         {Object.values(MAPPING.links).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
@@ -104,6 +104,7 @@ const Navbar = () => {
           </TooltipContent>
         </Tooltip>
       </div>
+      <div className="fixed inset-x-0 bg-background h-40 bottom-0 z-10 gradient-mask-t-0"></div>
     </TooltipProvider>
   )
 };
