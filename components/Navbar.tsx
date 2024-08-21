@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { IconProps } from "@/interfaces/icon";
 import PencilIcon from "@/components/icons/pencil";
 import PhotoIcon from "@/components/icons/photo";
 import GithubIcon from "@/components/icons/github";
@@ -23,22 +22,7 @@ import LightIcon from "@/components/icons/light";
 const Navbar = () => {
   const pathname = usePathname();
 
-  const MAPPING: {
-    links: {
-      [key: string]: {
-        href: string;
-        icon: ({ variant, ...props }: IconProps) => React.JSX.Element;
-        label: string;
-      }
-    },
-    socials: {
-      [key: string]: {
-        link: string;
-        icon: ({ variant, ...props }: IconProps) => React.JSX.Element;
-        label: string;
-      }
-    }
-  } = {
+  const MAPPING = {
     links: {
       home: {
         href: '/',
@@ -46,9 +30,9 @@ const Navbar = () => {
         label: "Home"
       },
       writings: {
-        href: '/writings',
+        href: '/thoughts',
         icon: PencilIcon,
-        label: 'Writings'
+        label: 'Thoughts'
       },
       photos: {
         href: '/photos',
