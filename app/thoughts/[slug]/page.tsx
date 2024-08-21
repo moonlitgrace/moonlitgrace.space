@@ -90,7 +90,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     <>
       <div className="w-full flex flex-col items-center gap-5">
         <h4 className="text-xs uppercase text-muted-foreground font-bold">{data.created_at}</h4>
-        <h1 className="text-5xl font-bold text-center leading-tight">{data.title}</h1>
+        <h1 className="text-5xl font-bold text-center leading-snug">{data.title}</h1>
         <Badge>{data.tag}</Badge>
       </div>
       <Markdown markdown={data.content} />
