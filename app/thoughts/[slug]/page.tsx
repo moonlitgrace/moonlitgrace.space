@@ -9,33 +9,55 @@ const MOCK_DATA = {
   created_at: '12 oct 2024',
   tag: 'Design',
   content: `
-# Forma ne misere
-
-## Nutrit illi mediis abstinet videtur levius adventare
-
 Lorem markdownum et? Cum adde ventos illum facta clara Cassiope: quod moenia
-membrisque Caucasus somnus, quem! Virorum me non, qui, admisso est colligit
-mersa: ulla. Nec dum et ipse, Prochytenque auras supplex me totiens?
+membrisque Caucasus somnus, quem! Virorum me non, qui, admisso est colligit mersa: ulla. Nec dum et ipse, Prochytenque auras supplex me totiens?
 
 ## Et mitia pro tostae nec monuere arbore
 
 Muro sustinet simul capiunt permaneo amissi amplecti: numero luctus relinquit
 curvari dextraque. *Eosdem futuri*!
 
+eg:
+\`FetchAPI\`
+
 ## Tinus illa tamen talia iubeatve sortes foedera
 
 Pavor nece sed nymphae tu rudente, neque Nonacria et voces similis pontum
 abolere metuens; iubae. Fuit dextra de quid animam temerarius deceptus.
+\`\`\`ts
+import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
 
-    var cifs = sector(vdsl_nvram, cpu(5, gbps_external * card,
-            sataGigabitInternet));
-    if (whitelistDisk > 36) {
-        pupUnc(gifTarget);
-    } else {
-        mountainSimm(gigabyte_minisite_box, databasePublishingWep);
-    }
-    gnu_num_boot(wave_wavelength / address + ldap, refreshUnfriend, 89);
+import hljs from 'highlight.js/lib/core';
+import 'highlight.js/styles/github-dark.css';
 
+import javascript from 'highlight.js/lib/languages/javascript';
+
+hljs.registerLanguage('javascript', javascript);
+
+const Markdown = ({ markdown }: { markdown: string }) => {
+  const marked = new Marked(
+    {
+      breaks: true,
+      gfm: true,
+    },
+    markedHighlight({
+      langPrefix: 'hljs language-',
+      highlight(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      }
+    })
+  )
+
+  return <article
+    className='prose dark:prose-invert dark:prose-code:selection:bg-primary prose-code:!bg-transparent prose-pre:p-0'
+    dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }}
+  ></article>
+}
+
+export default Markdown;
+\`\`\`
 ## Ferebant nomine illam paelicis phaedimus adicit altera
 
 Futura tardatus et utroque cratere suos coactus genas! Quatiebant ore umeris
@@ -66,9 +88,9 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center gap-3">
+      <div className="w-full flex flex-col items-center gap-5">
         <h4 className="text-xs uppercase text-muted-foreground font-bold">{data.created_at}</h4>
-        <h1 className="text-2xl font-bold">{data.title}</h1>
+        <h1 className="text-5xl font-bold text-center leading-tight">{data.title}</h1>
         <Badge>{data.tag}</Badge>
       </div>
       <Markdown markdown={data.content} />
