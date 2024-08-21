@@ -104,7 +104,7 @@ const Navbar = () => {
           </TooltipContent>
         </Tooltip>
       </div>
-      <div className="fixed inset-x-0 bg-background h-40 bottom-0 z-10 gradient-mask-t-0"></div>
+      <div className="pointer-events-none fixed inset-x-0 bg-background h-40 bottom-0 z-10 gradient-mask-t-0"></div>
     </TooltipProvider>
   )
 };
