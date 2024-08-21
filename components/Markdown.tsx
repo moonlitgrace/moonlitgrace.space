@@ -6,7 +6,6 @@ import '@/styles/highlight.js/github-dark.css';
 
 const languages = {
   plaintext: () => import('highlight.js/lib/languages/plaintext'),
-  javascript: () => import('highlight.js/lib/languages/javascript'),
   typescript: () => import('highlight.js/lib/languages/typescript'),
   python: () => import('highlight.js/lib/languages/python'),
   xml: () => import('highlight.js/lib/languages/xml'),
