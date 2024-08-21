@@ -1,4 +1,4 @@
-import { Marked } from 'marked';
+import { Marked, RendererObject } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 
 import hljs from 'highlight.js/lib/core';
@@ -22,18 +22,36 @@ async function registerLanguages() {
 registerLanguages();
 
 const Markdown = ({ markdown }: { markdown: string }) => {
-  const marked = new Marked(
-    {
-      breaks: true,
-      gfm: true,
+  const renderer: RendererObject = {
+    heading({ tokens, depth }) {
+      const text = this.parser.parseInline(tokens);
+      const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+      return `<h${depth}>
+        <a name="${escapedText}" class="no-underline text-primary" href="#${escapedText}">#.</a>
+        ${text}
+      </h${depth}>`;
     },
+    code({ text, lang }) {
+      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent).then(() => this.innerText = 'Copied')">Copy</button></div><code>${text}</code></pre>`;
+    },
+  };
+
+  const marked = new Marked(
     markedHighlight({
       langPrefix: 'hljs language-',
       highlight(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        let _lang = lang;
+        if (lang.includes('.')) _lang = lang.split('.')[1]
+        const language = hljs.getLanguage(_lang) ? _lang : 'plaintext';
         return hljs.highlight(code, { language }).value;
-      }
-    })
+      },
+    }),
+    {
+      breaks: true,
+      gfm: true,
+      renderer,
+    },
   )
 
   return <article
