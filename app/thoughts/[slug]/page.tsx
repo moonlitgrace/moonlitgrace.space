@@ -24,7 +24,7 @@ eg:
 
 Pavor nece sed nymphae tu rudente, neque Nonacria et voces similis pontum
 abolere metuens; iubae. Fuit dextra de quid animam temerarius deceptus.
-\`\`\`ts
+\`\`\`Markdown.tsx
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 
