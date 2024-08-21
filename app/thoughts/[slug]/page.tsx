@@ -1,3 +1,4 @@
+import Markdown from "@/components/Markdown";
 import { Badge } from "@/components/ui/badge";
 import { Metadata } from "next";
 
@@ -48,6 +49,7 @@ cibos lactantiaque viri, fert et gravem tubas ducibusque ducentem dimovit.
 6. Ulterius fulget
 
 Ulciscor levata humana, factum, cruore agri; ulla quidem venti. Capiat morte.
+
 Pontum pellitis equus oculisque flammae arma intra victu,; vulnere? In venere
 raptamque habitabat suos priora auctor sua **uterque momordi pudore**, mulcet
 mora equos dixerat mora [Gangetica sorte](http://lunares.org/lupis) sagitta.`
@@ -69,7 +71,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <h1 className="text-2xl font-bold">{data.title}</h1>
         <Badge>{data.tag}</Badge>
       </div>
-      <article className="whitespace-pre-line">{data.content}</article>
+      <Markdown markdown={data.content} />
     </>
   )
 }
