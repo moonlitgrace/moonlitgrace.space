@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { Metadata } from "next";
 
 const MOCK_DATA = {
   id: 1,
@@ -50,6 +51,12 @@ Ulciscor levata humana, factum, cruore agri; ulla quidem venti. Capiat morte.
 Pontum pellitis equus oculisque flammae arma intra victu,; vulnere? In venere
 raptamque habitabat suos priora auctor sua **uterque momordi pudore**, mulcet
 mora equos dixerat mora [Gangetica sorte](http://lunares.org/lupis) sagitta.`
+}
+
+export const metadata: Metadata = {
+  title: `${MOCK_DATA.title}. | moonlitspace`,
+  description: `Lorem markdownum et? Cum adde ventos illum facta clara Cassiope: quod moenia
+membrisque Caucasus somnus, quem! Virorum me non, qui, admisso est colligit`
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
