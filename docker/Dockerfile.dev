@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+# disable nextjs telementary
+ENV NEXT_TELEMETRY_DISABLED 1
+
+CMD npm run dev
