@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { db } from "@/db"
 import { type PostSelect, posts } from "@/db/schema"
-import { formatTime } from "@/lib/utils"
+import { formatDate } from "@/lib/utils"
 import { Metadata } from "next"
 import Link from "next/link"
 
@@ -26,7 +26,7 @@ export default async function Thoughts() {
       <div className="flex flex-col gap-5">
         {postsData.map((item) => (
           <div key={item.id} className="flex flex-col">
-            <span className="text-xs uppercase font-bold text-muted-foreground">{formatTime(item.createdAt)}</span>
+            <span className="text-xs uppercase font-bold text-muted-foreground">{formatDate(item.createdAt)}</span>
             <div className="flex items-center gap-2">
               <Link href={`/thoughts/${item.slug}`} className="text-lg relative before:bg-transparent before:absolute before:bottom-1 before:w-full before:h-0.5 before:duration-200 hover:before:bottom-0 hover:before:bg-primary">
                 {item.title}
