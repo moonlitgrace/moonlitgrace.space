@@ -36,6 +36,10 @@ const Markdown = ({ markdown }: { markdown: string }) => {
     code({ text, lang }) {
       return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent).then(() => { this.innerText = 'Copied'; setTimeout(() => { this.innerText = 'Copy' }, 2000); })">Copy</button></div><code>${text}</code></pre>`;
     },
+    link(args) {
+      const link = marked.Renderer.prototype.link.call(this, args);
+      return link.replace('<a', '<a target="_blank" rel="noreferrer"');
+    }
   };
 
   const walkTokens = (token: Token) => {
