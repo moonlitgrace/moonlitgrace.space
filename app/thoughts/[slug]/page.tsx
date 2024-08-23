@@ -4,12 +4,19 @@ import { db } from "@/db";
 import { posts, PostSelect } from "@/db/schema";
 import { formatTime } from "@/lib/utils";
 import { eq } from "drizzle-orm";
+import removeMarkdown from "markdown-to-text";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: `Test. | moonlitspace`,
-  description: `Lorem markdownum et? Cum adde ventos illum facta clara Cassiope: quod moenia
-membrisque Caucasus somnus, quem! Virorum me non, qui, admisso est colligit`
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
+  const { title, content } = (await db.select({ title: posts.title, content: posts.content }).from(posts).where(eq(posts.slug, params.slug)))[0];
+  const description = removeMarkdown(content).slice(0, 100) + '...';
+
+  return {
+    title,
+    description,
+  }
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
