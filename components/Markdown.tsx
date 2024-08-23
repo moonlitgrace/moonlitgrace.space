@@ -1,4 +1,4 @@
-import { Marked, RendererObject } from 'marked';
+import { Marked, RendererObject, Token } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 
 import hljs from 'highlight.js/lib/core';
@@ -38,6 +38,12 @@ const Markdown = ({ markdown }: { markdown: string }) => {
     },
   };
 
+  const walkTokens = (token: Token) => {
+    if (token.type === 'heading') {
+      if (token.depth === 1) token.depth = 2;
+    }
+  }
+
   const marked = new Marked(
     markedHighlight({
       langPrefix: 'hljs language-',
@@ -52,6 +58,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       breaks: true,
       gfm: true,
       renderer,
+      walkTokens,
     },
   );
 
