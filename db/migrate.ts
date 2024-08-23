@@ -8,7 +8,7 @@ async function main() {
     });
     console.log('Migration successful!');
   } catch (err) {
-    console.error(err);
+    console.error('Migration failed: ', err);
     process.exit(1);
   } finally {
     await connection.end();
