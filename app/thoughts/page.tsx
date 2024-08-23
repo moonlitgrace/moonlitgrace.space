@@ -33,15 +33,15 @@ export default async function Thoughts() {
             <span className="text-xs font-bold uppercase text-muted-foreground">
               {formatDate(item.createdAt)}
             </span>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
               <Link
                 href={`/thoughts/${item.slug}`}
                 className="relative text-lg before:absolute before:bottom-1 before:h-0.5 before:w-full before:bg-transparent before:duration-200 hover:before:bottom-0 hover:before:bg-primary"
               >
                 {item.title}
               </Link>
-              <Separator className="flex-1" />
-              <Badge className="capitalize">{item.tag}</Badge>
+              <Separator className="hidden md:flex md:flex-1" />
+              <Badge className="capitalize w-min">{item.tag}</Badge>
             </div>
           </div>
         ))}
