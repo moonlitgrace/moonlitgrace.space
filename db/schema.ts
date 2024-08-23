@@ -9,4 +9,4 @@ export const posts = pgTable('posts', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
 })
 
-export type Posts = typeof posts.$inferSelect;
+export type PostSelect = typeof posts.$inferSelect;
