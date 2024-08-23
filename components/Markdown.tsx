@@ -11,12 +11,12 @@ const languages = {
   python: () => import('highlight.js/lib/languages/python'),
   xml: () => import('highlight.js/lib/languages/xml'),
   css: () => import('highlight.js/lib/languages/css'),
-}
+};
 
 async function registerLanguages() {
   for (const [name, loadLanguage] of Object.entries(languages)) {
     const language = (await loadLanguage()).default;
-    hljs.registerLanguage(name, language)
+    hljs.registerLanguage(name, language);
   }
 }
 
@@ -43,7 +43,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       langPrefix: 'hljs language-',
       highlight(code, lang) {
         let _lang = lang;
-        if (lang.includes('.')) _lang = lang.split('.')[1]
+        if (lang.includes('.')) _lang = lang.split('.')[1];
         const language = hljs.getLanguage(_lang) ? _lang : 'plaintext';
         return hljs.highlight(code, { language }).value;
       },
@@ -53,12 +53,14 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       gfm: true,
       renderer,
     },
-  )
+  );
 
-  return <article
-    className='prose dark:prose-invert prose-pre:bg-secondary/25 prose-pre:rounded-2xl'
-    dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }}
-  ></article>
-}
+  return (
+    <article
+      className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
+      dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }}
+    ></article>
+  );
+};
 
 export default Markdown;

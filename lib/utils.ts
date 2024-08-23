@@ -1,8 +1,8 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function formatDate(dateStr: Date) {
@@ -10,6 +10,6 @@ export function formatDate(dateStr: Date) {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
-  })
+  });
   return date;
 }

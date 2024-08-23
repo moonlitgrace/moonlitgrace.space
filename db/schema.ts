@@ -7,6 +7,6 @@ export const posts = pgTable('posts', {
   tag: text('tag').notNull(),
   content: text('content').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
-})
+});
 
 export type PostSelect = typeof posts.$inferSelect;
