@@ -12,7 +12,13 @@ export const metadata: Metadata = {
 }
 
 export default async function Thoughts() {
-  const postsData: PostSelect[] = await db.select().from(posts);
+  const postsData: Omit<PostSelect, 'content'>[] = await db.select({
+    id: posts.id,
+    title: posts.title,
+    slug: posts.slug,
+    tag: posts.tag,
+    createdAt: posts.createdAt
+  }).from(posts);
 
   return (
     <>
