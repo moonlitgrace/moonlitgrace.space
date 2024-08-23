@@ -1,13 +1,15 @@
-import MoonlitGraceArt from "@/components/MoonlitGraceArt";
-import { Metadata } from "next";
+import MoonlitGraceArt from '@/components/MoonlitGraceArt';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Home. | moonlitspace",
-  description: "a graceful space",
+  title: 'Home. | moonlitspace',
+  description: 'a graceful space',
 };
 
 export default function Home() {
-  return <div className="w-full grid place-items-center">
-    <MoonlitGraceArt />
-  </div>;
+  return (
+    <div className="grid w-full place-items-center">
+      <MoonlitGraceArt />
+    </div>
+  );
 }

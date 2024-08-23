@@ -1,6 +1,6 @@
-import { db } from "@/db";
-import { posts } from "@/db/schema";
-import { postsMockData } from "@/db/mock/posts";
+import { db } from '@/db';
+import { posts } from '@/db/schema';
+import { postsMockData } from '@/db/mock/posts';
 
 async function main() {
   try {
@@ -18,4 +18,4 @@ async function main() {
   }
 }
 
-main()
+main();

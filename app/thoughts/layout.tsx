@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react';
 
 export default function ThoughtsLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <main className="w-full flex flex-col gap-10 mt-10 mb-40">
-    {children}
-  </main>
+  return <main className="mb-40 mt-10 flex w-full flex-col gap-10">{children}</main>;
 }
