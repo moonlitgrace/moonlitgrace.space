@@ -8,8 +8,8 @@ async function main() {
     // delete previous data
     await db.delete(posts);
     // insert mock data
-    await db.insert(posts).values(postsMockData);
-    console.log('Seeding done!');
+    const insertedPosts = await db.insert(posts).values(postsMockData).returning();
+    console.log(`Seeded ${insertedPosts.length} posts`);
   } catch (err) {
     console.error(err);
     throw new Error('Failed to seed database');
