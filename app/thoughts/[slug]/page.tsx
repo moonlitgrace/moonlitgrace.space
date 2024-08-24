@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <h4 className="text-xs font-bold uppercase text-muted-foreground">
           {formatDate(postData.createdAt)}
         </h4>
-        <h1 className="text-center text-4xl font-bold leading-snug">{postData.title}</h1>
+        <h1 className="text-center text-4xl font-black leading-snug">{postData.title}</h1>
         <Badge className="capitalize">{postData.tag}</Badge>
       </div>
       <Markdown markdown={postData.content} />
