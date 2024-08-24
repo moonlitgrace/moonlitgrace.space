@@ -14,7 +14,7 @@ import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
 import LightIcon from '@/components/icons/light';
 
-const Navbar = () => {
+const Appbar = () => {
   const pathname = usePathname();
 
   const MAPPING = {
@@ -114,4 +114,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Appbar;

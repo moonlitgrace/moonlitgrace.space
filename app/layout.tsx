@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 // Styles
 import '@/styles/globals.css';
-import Navbar from '@/components/Navbar';
+import Appbar from '@/components/Appbar';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -21,7 +21,7 @@ export default function RootLayout({
         className={cn('dark container flex min-h-screen font-sans antialiased', fontSans.variable)}
       >
         {children}
-        <Navbar />
+        <Appbar />
       </body>
     </html>
   );
