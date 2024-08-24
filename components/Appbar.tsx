@@ -12,7 +12,6 @@ import LabIcon from '@/components/icons/lab';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
-import LightIcon from '@/components/icons/light';
 
 const Appbar = () => {
   const pathname = usePathname();
@@ -99,18 +98,6 @@ const Appbar = () => {
             </TooltipContent>
           </Tooltip>
         ))}
-        <Separator orientation="vertical" className="h-10" />
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant={'ghost'}
-              className={'grid aspect-square size-11 place-items-center rounded-xl'}
-            >
-              <LightIcon variant="outline" className="size-5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent sideOffset={15}>Light Mode</TooltipContent>
-        </Tooltip>
       </div>
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-10 h-40 bg-background gradient-mask-t-0"></div>
     </TooltipProvider>
