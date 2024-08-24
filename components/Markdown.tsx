@@ -41,7 +41,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       </h${depth}>`;
     },
     code({ text, lang }) {
-      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent).then(() => { this.innerText = 'Copied'; setTimeout(() => { this.innerText = 'Copy' }, 2000); })">Copy</button></div><code>${text}</code></pre>`;
+      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent).then(() => { this.innerText = 'Copied'; setTimeout(() => { this.innerText = 'Copy' }, 2000); })">Copy</button></div><div class='flex-1 overflow-x-scroll'><code>${text}</code></div></pre>`;
     },
     link(args) {
       const link = marked.Renderer.prototype.link.call(this, args);
