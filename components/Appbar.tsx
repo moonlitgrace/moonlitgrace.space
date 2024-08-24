@@ -24,14 +24,14 @@ const Appbar = () => {
         label: 'Home',
       },
       writings: {
-        href: '/thoughts',
+        href: '/writings',
         icon: PencilIcon,
-        label: 'Thoughts',
+        label: 'Writings',
       },
       photos: {
-        href: '/lab',
+        href: '/crafts',
         icon: LabIcon,
-        label: 'Design lab',
+        label: 'Crafts',
       },
     },
     socials: {
