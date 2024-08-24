@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'my graceful thoughts',
 };
 
-export default async function Thoughts() {
+export default async function WritingsPage() {
   const postsData: Omit<PostSelect, 'content'>[] = await db
     .select({
       id: posts.id,
@@ -25,7 +25,7 @@ export default async function Thoughts() {
   return (
     <>
       <h2 className="text-3xl font-bold">
-        Thoughts<span className="text-primary">.</span>
+        Writings<span className="text-primary">.</span>
       </h2>
       <div className="flex flex-col gap-5">
         {postsData.map((item) => (
@@ -35,7 +35,7 @@ export default async function Thoughts() {
             </span>
             <div className="flex flex-col gap-1 md:flex-row md:items-center md:gap-2">
               <Link
-                href={`/thoughts/${item.slug}`}
+                href={`/writings/${item.slug}`}
                 className="relative text-lg before:absolute before:bottom-1 before:h-0.5 before:w-full before:bg-transparent before:duration-200 hover:before:bottom-0 hover:before:bg-primary"
               >
                 {item.title}
