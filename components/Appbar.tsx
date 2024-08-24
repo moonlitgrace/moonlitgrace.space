@@ -22,19 +22,16 @@ const Appbar = () => {
         href: '/',
         icon: HomeIcon,
         label: 'Home',
-        disabled: false,
       },
       writings: {
         href: '/thoughts',
         icon: PencilIcon,
         label: 'Thoughts',
-        disabled: false,
       },
       photos: {
         href: '/lab',
         icon: LabIcon,
         label: 'Design lab',
-        disabled: true,
       },
     },
     socials: {
@@ -57,18 +54,18 @@ const Appbar = () => {
         {Object.values(MAPPING.links).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
-              <Link href={item.href}>
-                <Button
-                  disabled={item.disabled}
-                  variant={pathname === item.href ? 'default' : 'ghost'}
-                  className={'grid aspect-square size-11 place-items-center rounded-xl'}
-                >
+              <Button
+                asChild
+                variant={pathname === item.href ? 'default' : 'ghost'}
+                className={'grid aspect-square size-11 place-items-center rounded-xl'}
+              >
+                <Link href={item.href}>
                   {React.createElement(item.icon, {
                     variant: pathname === item.href ? 'solid' : 'outline',
                     className: 'size-5',
                   })}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </TooltipTrigger>
             <TooltipContent sideOffset={15}>
               <p>{item.label}</p>
