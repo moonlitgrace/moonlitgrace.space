@@ -8,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import PencilIcon from '@/components/icons/pencil';
-import PhotoIcon from '@/components/icons/photo';
+import LabIcon from '@/components/icons/lab';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
@@ -23,26 +23,29 @@ const Appbar = () => {
         href: '/',
         icon: HomeIcon,
         label: 'Home',
+        disabled: false,
       },
       writings: {
         href: '/thoughts',
         icon: PencilIcon,
         label: 'Thoughts',
+        disabled: false,
       },
       photos: {
-        href: '/photos',
-        icon: PhotoIcon,
-        label: 'Photos',
+        href: '/lab',
+        icon: LabIcon,
+        label: 'Design lab',
+        disabled: true,
       },
     },
     socials: {
       github: {
-        link: 'https://github.com/moonlitgrace',
+        url: 'https://github.com/moonlitgrace',
         icon: GithubIcon,
         label: 'See me projects!',
       },
       mail: {
-        link: 'mailto:moonlitgrace.gaia@gmail.com',
+        url: 'mailto:moonlitgrace.gaia@gmail.com',
         icon: MailIcon,
         label: 'Mail me!',
       },
@@ -55,18 +58,18 @@ const Appbar = () => {
         {Object.values(MAPPING.links).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
-              <Button
-                asChild
-                variant={pathname === item.href ? 'default' : 'ghost'}
-                className={'grid aspect-square size-11 place-items-center rounded-xl'}
-              >
-                <Link href={item.href}>
+              <Link href={item.href}>
+                <Button
+                  disabled={item.disabled}
+                  variant={pathname === item.href ? 'default' : 'ghost'}
+                  className={'grid aspect-square size-11 place-items-center rounded-xl'}
+                >
                   {React.createElement(item.icon, {
                     variant: pathname === item.href ? 'solid' : 'outline',
                     className: 'size-5',
                   })}
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </TooltipTrigger>
             <TooltipContent sideOffset={15}>
               <p>{item.label}</p>
@@ -83,7 +86,7 @@ const Appbar = () => {
                 variant={'ghost'}
                 className={'grid aspect-square size-11 place-items-center rounded-xl'}
               >
-                <a href={item.link} target="_blank">
+                <a href={item.url} target="_blank">
                   {React.createElement(item.icon, {
                     variant: 'outline',
                     className: 'size-5',

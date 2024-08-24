@@ -11,6 +11,13 @@ const languages = {
   python: () => import('highlight.js/lib/languages/python'),
   xml: () => import('highlight.js/lib/languages/xml'),
   css: () => import('highlight.js/lib/languages/css'),
+  bash: () => import('highlight.js/lib/languages/bash'),
+  markdown: () => import('highlight.js/lib/languages/markdown'),
+  django: () => import('highlight.js/lib/languages/django'),
+  dockerfile: () => import('highlight.js/lib/languages/dockerfile'),
+  json: () => import('highlight.js/lib/languages/json'),
+  scss: () => import('highlight.js/lib/languages/scss'),
+  yaml: () => import('highlight.js/lib/languages/yaml'),
 };
 
 async function registerLanguages() {
@@ -39,14 +46,14 @@ const Markdown = ({ markdown }: { markdown: string }) => {
     link(args) {
       const link = marked.Renderer.prototype.link.call(this, args);
       return link.replace('<a', '<a target="_blank" rel="noreferrer"');
-    }
+    },
   };
 
   const walkTokens = (token: Token) => {
     if (token.type === 'heading') {
       if (token.depth === 1) token.depth = 2;
     }
-  }
+  };
 
   const marked = new Marked(
     markedHighlight({
