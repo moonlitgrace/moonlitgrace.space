@@ -67,3 +67,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* custom classes */
+@layer utilities {
+  .underline {
+    @apply no-underline before:absolute before:bottom-1 before:h-0.5 before:w-full before:bg-transparent before:duration-200 hover:before:bottom-0 hover:before:bg-primary;
+  }
+}
