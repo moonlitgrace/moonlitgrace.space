@@ -48,7 +48,7 @@ const Appbar = () => {
 
   return (
     <TooltipProvider delayDuration={500}>
-      <div className="fixed left-1/2 md:left-10 transform md:top-1/2 bottom-10 md:bottom-auto z-20 flex md:flex-col -translate-x-1/2 md:-translate-y-1/2 items-center gap-2 rounded-2xl border bg-background p-2">
+      <div className="fixed bottom-10 left-1/2 z-20 flex -translate-x-1/2 transform items-center gap-2 rounded-2xl border bg-background p-2 md:bottom-auto md:left-10 md:top-1/2 md:-translate-y-1/2 md:flex-col">
         {Object.values(MAPPING.links).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
@@ -70,7 +70,10 @@ const Appbar = () => {
             </TooltipContent>
           </Tooltip>
         ))}
-        <Separator orientation={isMobile ? 'vertical' : 'horizontal'} className={cn(isMobile ? 'h-5' : 'w-1/2 h-px')} />
+        <Separator
+          orientation={isMobile ? 'vertical' : 'horizontal'}
+          className={cn(isMobile ? 'h-5' : 'h-px w-1/2')}
+        />
         {Object.values(MAPPING.socials).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 export const useScreenDevice = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -12,12 +12,12 @@ export const useScreenDevice = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-    }
-  }, [])
+    };
+  }, []);
 
   const isMobile = width < 768;
   const isTablet = width <= 1024;
   const isDesktop = width > 1024;
 
   return { isMobile, isTablet, isDesktop };
-}
+};
