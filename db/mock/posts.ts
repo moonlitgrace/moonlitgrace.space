@@ -3,6 +3,7 @@ export const postsMockData = [
     title: 'Getting Started with Svelte',
     slug: 'getting-started-with-svelte',
     tag: 'framework',
+    cover: 'https://res.cloudinary.com/dp9gvjh7m/image/upload/v1724614260/introducing_svelte_cpw9kr.png',
     content: `
 # Introduction to Svelte
 

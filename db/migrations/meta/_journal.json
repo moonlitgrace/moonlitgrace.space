@@ -15,6 +15,13 @@
       "when": 1724426840343,
       "tag": "0001_dusty_vector",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724614603521,
+      "tag": "0002_abnormal_valeria_richards",
+      "breakpoints": true
     }
   ]
 }
