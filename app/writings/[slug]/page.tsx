@@ -43,9 +43,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         {postData.cover && (
           <div className="relative h-40 w-full">
             <Image
-              src={
-                'https://res.cloudinary.com/dp9gvjh7m/image/upload/v1724599683/git-blog-header_twmtas.png'
-              }
+              src={postData.cover}
               alt={postData.title}
               fill
               objectFit="cover"
