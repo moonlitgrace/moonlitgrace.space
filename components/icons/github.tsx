@@ -1,4 +1,4 @@
-import { IconProps } from '@/interfaces/icon';
+import { IconProps } from '@/types/icon';
 
 const GithubIcon = ({ variant = 'outline', ...props }: IconProps) => {
   return variant === 'solid' ? (

@@ -37,8 +37,8 @@ export default async function WritingsPage() {
               <Link href={`/writings/${item.slug}`} className="relative text-lg underline">
                 {item.title}
               </Link>
-              <Separator className="hidden md:flex flex-1" />
-              <Badge className="hidden md:flex w-min capitalize">{item.tag}</Badge>
+              <Separator className="hidden flex-1 md:flex" />
+              <Badge className="hidden w-min capitalize md:flex">{item.tag}</Badge>
             </div>
           </div>
         ))}

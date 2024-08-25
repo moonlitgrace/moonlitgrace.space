@@ -1,4 +1,4 @@
-import { IconProps } from '@/interfaces/icon';
+import { IconProps } from '@/types/icon';
 
 const HomeIcon = ({ variant, ...props }: IconProps) => {
   if (variant === 'solid') {
