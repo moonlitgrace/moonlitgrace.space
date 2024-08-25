@@ -12,6 +12,7 @@ import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
 import { useScreenDetector } from '@/hooks/useScreenDetector';
+import { cn } from '@/lib/utils';
 
 const Appbar = () => {
   const pathname = usePathname();
@@ -69,7 +70,7 @@ const Appbar = () => {
             </TooltipContent>
           </Tooltip>
         ))}
-        <Separator className='md:w-1/2 h-1/2 md:h-px' />
+        <Separator orientation={isMobile ? 'vertical' : 'horizontal'} className={cn(isMobile ? 'h-5' : 'w-1/2 h-px')} />
         {Object.values(MAPPING.socials).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
