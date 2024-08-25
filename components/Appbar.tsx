@@ -11,13 +11,13 @@ import PencilIcon from '@/components/icons/pencil';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
-import { useScreenDetector } from '@/hooks/useScreenDetector';
+import { useScreenDevice } from '@/hooks/useScreenDevice';
 import { cn } from '@/lib/utils';
 
 const Appbar = () => {
   const pathname = usePathname();
 
-  const { isMobile } = useScreenDetector();
+  const { isMobile } = useScreenDevice();
 
   const MAPPING = {
     links: {

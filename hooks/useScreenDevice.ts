@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const useScreenDetector = () => {
+export const useScreenDevice = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
   function handleResize() {
