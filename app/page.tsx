@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="grid w-full place-items-center">
+    <main className="grid w-full place-items-center">
       <MoonlitGraceArt />
-    </div>
+    </main>
   );
 }
