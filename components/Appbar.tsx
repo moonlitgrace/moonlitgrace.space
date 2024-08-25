@@ -11,9 +11,12 @@ import PencilIcon from '@/components/icons/pencil';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
+import { useScreenDetector } from '@/hooks/useScreenDetector';
 
 const Appbar = () => {
   const pathname = usePathname();
+
+  const { isMobile } = useScreenDetector();
 
   const MAPPING = {
     links: {
@@ -44,7 +47,7 @@ const Appbar = () => {
 
   return (
     <TooltipProvider delayDuration={500}>
-      <div className="fixed bottom-10 left-1/2 z-20 flex -translate-x-1/2 transform items-center gap-2 rounded-2xl border bg-background p-2">
+      <div className="fixed left-1/2 md:left-10 transform md:top-1/2 bottom-10 md:bottom-auto z-20 flex md:flex-col -translate-x-1/2 md:-translate-y-1/2 items-center gap-2 rounded-2xl border bg-background p-2">
         {Object.values(MAPPING.links).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
@@ -61,12 +64,12 @@ const Appbar = () => {
                 </Link>
               </Button>
             </TooltipTrigger>
-            <TooltipContent sideOffset={15}>
+            <TooltipContent sideOffset={15} side={isMobile ? 'top' : 'right'}>
               <p>{item.label}</p>
             </TooltipContent>
           </Tooltip>
         ))}
-        <Separator orientation="vertical" className="h-10" />
+        <Separator className='md:w-1/2 h-1/2 md:h-px' />
         {Object.values(MAPPING.socials).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
@@ -84,13 +87,13 @@ const Appbar = () => {
                 </a>
               </Button>
             </TooltipTrigger>
-            <TooltipContent sideOffset={15}>
+            <TooltipContent sideOffset={15} side={isMobile ? 'top' : 'right'}>
               <p>{item.label}</p>
             </TooltipContent>
           </Tooltip>
         ))}
       </div>
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-10 h-40 bg-background gradient-mask-t-0"></div>
+      <div className="md:hiddens pointer-events-none fixed inset-x-0 bottom-0 z-10 h-40 bg-background gradient-mask-t-0"></div>
     </TooltipProvider>
   );
 };
