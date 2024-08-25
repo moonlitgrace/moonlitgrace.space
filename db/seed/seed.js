@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { posts } from '@/db/schema';
-import { postsMockData } from '@/db/mock/posts';
+import { postsMockData } from './mock/posts';
 
 async function main() {
   try {
