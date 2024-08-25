@@ -40,13 +40,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </h4>
         <h1 className="text-center text-4xl font-black leading-snug">{postData.title}</h1>
         <Badge className="capitalize">{postData.tag}</Badge>
-        <div className='relative w-full h-40'>
+        <div className="relative h-40 w-full">
           <Image
-            src={'https://res.cloudinary.com/dp9gvjh7m/image/upload/v1724599683/git-blog-header_twmtas.png'}
+            src={
+              'https://res.cloudinary.com/dp9gvjh7m/image/upload/v1724599683/git-blog-header_twmtas.png'
+            }
             alt={postData.title}
             fill
-            objectFit='cover'
-            className='rounded-2xl'
+            objectFit="cover"
+            className="rounded-2xl"
           />
         </div>
       </div>
