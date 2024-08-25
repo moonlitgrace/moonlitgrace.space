@@ -8,7 +8,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import PencilIcon from '@/components/icons/pencil';
-import LabIcon from '@/components/icons/lab';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
@@ -27,11 +26,6 @@ const Appbar = () => {
         href: '/writings',
         icon: PencilIcon,
         label: 'Writings',
-      },
-      photos: {
-        href: '/crafts',
-        icon: LabIcon,
-        label: 'Crafts',
       },
     },
     socials: {
