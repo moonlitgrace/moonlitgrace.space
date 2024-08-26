@@ -64,7 +64,7 @@
     @apply border-border;
   }
   html {
-    @apply scroll-pt-10;
+    @apply scroll-pt-10 scrollbar scrollbar-thumb-primary scrollbar-track-transparent;
   }
   body {
     @apply bg-background text-foreground;

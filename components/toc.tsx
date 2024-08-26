@@ -7,14 +7,14 @@ import ListIcon from './icons/list';
 import { useState } from 'react';
 
 const TableOfContents = ({ headings }: { headings: string[] }) => {
-  const [tocOpen, setTocOpen] = useState(false);
+  const [tocOpen, setTocOpen] = useState(true);
 
   return (
     <div className="fixed right-4 top-1/2 hidden -translate-y-1/2 rounded-2xl border bg-background p-2 md:flex">
-      <Popover onOpenChange={setTocOpen}>
+      <Popover onOpenChange={setTocOpen} open={tocOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="ghost"
+            variant={tocOpen ? 'secondary' : 'ghost'}
             className={'grid aspect-square size-11 place-items-center rounded-xl'}
           >
             <ListIcon className="size-5" variant={tocOpen ? 'solid' : 'outline'} />
