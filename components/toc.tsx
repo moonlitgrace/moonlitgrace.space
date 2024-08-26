@@ -1,10 +1,10 @@
 'use client';
 
-import { escapeText } from '@/lib/utils';
+import { cn, escapeText } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from './ui/button';
-import ListIcon from './icons/list';
+import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import Chevrons from './icons/chevrons';
 
 const TableOfContents = ({ headings }: { headings: string[] }) => {
   const [tocOpen, setTocOpen] = useState(true);
@@ -17,7 +17,12 @@ const TableOfContents = ({ headings }: { headings: string[] }) => {
             variant={tocOpen ? 'secondary' : 'ghost'}
             className={'grid aspect-square size-11 place-items-center rounded-xl'}
           >
-            <ListIcon className="size-5" variant={tocOpen ? 'solid' : 'outline'} />
+            <Chevrons
+              className={cn(
+                'size-5 transition-transform duration-300',
+                tocOpen ? 'rotate-90 scale-x-[-1]' : '-rotate-90 scale-x-[1]',
+              )}
+            />
           </Button>
         </PopoverTrigger>
         <PopoverContent
