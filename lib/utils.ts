@@ -13,3 +13,7 @@ export function formatDate(dateStr: Date) {
   });
   return date;
 }
+
+export function escapeText(text: string) {
+  return text.toLowerCase().replace(/[^\w]+/g, '-');
+}
