@@ -1,4 +1,4 @@
-import Markdown from '@/components/Markdown';
+import Markdown from '@/components/markdown';
 import { Badge } from '@/components/ui/badge';
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 // Styles
 import '@/styles/globals.css';
-import Appbar from '@/components/Appbar';
+import Appbar from '@/components/appbar';
 
 const fontSans = FontSans({
   subsets: ['latin'],
