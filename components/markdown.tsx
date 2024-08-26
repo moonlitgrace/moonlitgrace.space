@@ -1,5 +1,6 @@
 import { Marked, RendererObject, Token } from 'marked';
 import { markedHighlight } from 'marked-highlight';
+import DOMPurify from 'isomorphic-dompurify';
 
 import hljs from 'highlight.js/lib/core';
 import '@/styles/highlight.js/github-dark.css';
@@ -76,7 +77,11 @@ const Markdown = ({ markdown }: { markdown: string }) => {
   return (
     <article
       className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
-      dangerouslySetInnerHTML={{ __html: marked.parse(markdown) }}
+      dangerouslySetInnerHTML={{
+        __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
+          USE_PROFILES: { html: true },
+        }),
+      }}
     ></article>
   );
 };
