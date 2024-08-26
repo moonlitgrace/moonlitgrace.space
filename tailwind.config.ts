@@ -76,6 +76,7 @@ const config = {
     require('tailwindcss-animate'),
     require('tailwind-gradient-mask-image'),
     require('@tailwindcss/typography'),
+    require('tailwind-scrollbar'),
   ],
 } satisfies Config;
 
