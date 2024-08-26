@@ -74,6 +74,6 @@
 /* custom classes */
 @layer utilities {
   .underline {
-    @apply no-underline relative w-max before:absolute before:bottom-1 before:h-0.5 before:w-full before:bg-transparent before:duration-200 hover:before:bottom-0 hover:before:bg-primary;
+    @apply decoration-transparent decoration-2 underline-offset-2 duration-300 ease-out hover:decoration-primary hover:underline-offset-4;
   }
 }

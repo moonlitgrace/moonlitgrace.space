@@ -38,8 +38,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const tokens = lexer.lex(postData.content);
   const headings = tokens
     .filter((token) => token.type === 'heading')
-    .map((token) => (token as Tokens.Heading).text)
-  console.log(headings)
+    .map((token) => (token as Tokens.Heading).text);
 
   return (
     <>
@@ -61,8 +60,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         )}
       </div>
-      <TableOfContents headings={headings} />
       <Markdown markdown={postData.content} />
+      {headings.length && <TableOfContents headings={headings} />}
     </>
   );
 }
