@@ -97,7 +97,7 @@ const Appbar = () => {
           </Tooltip>
         ))}
       </div>
-      <div className="md:hiddens pointer-events-none fixed inset-x-0 bottom-0 z-10 h-40 bg-background gradient-mask-t-0"></div>
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-10 h-40 bg-background gradient-mask-t-0 md:hidden"></div>
     </TooltipProvider>
   );
 };
