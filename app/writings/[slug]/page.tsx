@@ -1,10 +1,12 @@
 import Markdown from '@/components/markdown';
+import TableOfContents from '@/components/toc';
 import { Badge } from '@/components/ui/badge';
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';
 import { eq } from 'drizzle-orm';
 import removeMarkdown from 'markdown-to-text';
+import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
 import Image from 'next/image';
 
@@ -32,6 +34,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
     await db.select().from(posts).where(eq(posts.slug, params.slug))
   )[0];
 
+  const lexer = new marked.Lexer();
+  const tokens = lexer.lex(postData.content);
+  const headings = tokens
+    .filter((token) => token.type === 'heading')
+    .map((token) => (token as Tokens.Heading).text)
+  console.log(headings)
+
   return (
     <>
       <div className="flex w-full flex-col items-center gap-5">
@@ -52,6 +61,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         )}
       </div>
+      <TableOfContents headings={headings} />
       <Markdown markdown={postData.content} />
     </>
   );

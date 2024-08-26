@@ -4,6 +4,7 @@ import DOMPurify from 'isomorphic-dompurify';
 
 import hljs from 'highlight.js/lib/core';
 import '@/styles/highlight.js/github-dark.css';
+import { escapeText } from '@/lib/utils';
 
 const languages = {
   plaintext: () => import('highlight.js/lib/languages/plaintext'),
@@ -34,7 +35,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
   const renderer: RendererObject = {
     heading({ tokens, depth }) {
       const text = this.parser.parseInline(tokens);
-      const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+      const escapedText = escapeText(text);
 
       return `<h${depth}>
         <a name="${escapedText}" class="no-underline text-primary" href="#${escapedText}">#.</a>
