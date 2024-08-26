@@ -32,8 +32,8 @@ const TableOfContents = ({ headings }: { headings: string[] }) => {
         >
           <h3 className="font-bold">Table of Contents</h3>
           <div className="flex flex-col gap-1">
-            {headings.map((heading) => (
-              <a className="w-max font-medium underline" href={`#${escapeText(heading)}`}>
+            {headings.map((heading, idx) => (
+              <a key={idx} className="w-max font-medium underline" href={`#${escapeText(heading)}`}>
                 <span className="text-primary">#.&nbsp;</span>
                 {heading}
               </a>

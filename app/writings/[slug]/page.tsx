@@ -53,9 +53,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <Image
               src={postData.cover}
               alt={postData.title}
+              priority={true}
               fill
-              objectFit="cover"
-              className="rounded-2xl"
+              className="rounded-2xl object-cover"
             />
           </div>
         )}
