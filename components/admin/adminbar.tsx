@@ -18,9 +18,9 @@ const Adminbar = () => {
   const MAPPING = {
     links: {
       home: {
-        href: '/',
+        href: '/admin',
         icon: HomeIcon,
-        label: 'Home',
+        label: 'Admin Home',
       },
       blog: {
         href: '/admin/blog',
@@ -61,4 +61,3 @@ const Adminbar = () => {
 };
 
 export default Adminbar;
-

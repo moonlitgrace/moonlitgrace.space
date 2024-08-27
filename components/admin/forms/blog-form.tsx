@@ -1,0 +1,53 @@
+'use client'
+
+import adminBlogSubmit from '@/actions/admin';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { FormEvent } from 'react';
+import { useFormState, useFormStatus } from 'react-dom';
+
+type Props = {
+  id?: number;
+  title?: string;
+  tag?: string;
+  content?: string;
+};
+
+export default function AdminBlogForm({ id, title = '', tag = '', content = '' }: Props) {
+  const [state, action] = useFormState(adminBlogSubmit, undefined)
+
+  return (
+    <form className="flex flex-col gap-5" action={action}>
+      {state?.errors.update}
+      <input hidden type='checkbox' checked={id !== undefined} name='update' readOnly />
+      <div className="flex gap-4">
+        <div className="grid w-full items-center gap-2">
+          <Label htmlFor="title">Title</Label>
+          <Input type="text" id="title" name="title" placeholder="Title" defaultValue={title} />
+        </div>
+        <div className="grid w-max items-center gap-2">
+          <Label htmlFor="tag">Tag</Label>
+          <Input type="text" id="tag" name="tag" placeholder="Tag" defaultValue={tag} />
+        </div>
+      </div>
+      <div className="grid w-full gap-2">
+        <Label htmlFor="content">Content</Label>
+        <Textarea
+          className="h-96"
+          placeholder="Type content here."
+          id="content"
+          name="content"
+          defaultValue={content}
+        />
+      </div>
+      <SubmitButton />
+    </form>
+  );
+};
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return <Button disabled={pending}>Submit</Button>
+}
