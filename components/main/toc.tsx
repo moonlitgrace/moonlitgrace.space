@@ -4,7 +4,7 @@ import { cn, escapeText } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import Chevrons from './icons/chevrons';
+import Chevrons from '@/components/icons/chevrons';
 
 const TableOfContents = ({ headings }: { headings: string[] }) => {
   const [tocOpen, setTocOpen] = useState(true);

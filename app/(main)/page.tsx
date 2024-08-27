@@ -2,7 +2,7 @@ import MoonlitGraceArt from '@/components/main/moonlitgrace-art';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Home. | moonlitspace',
+  title: 'Home.space',
   description: 'a graceful space',
 };
 
