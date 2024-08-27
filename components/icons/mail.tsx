@@ -1,6 +1,6 @@
-import { IconProps } from '@/types/icon';
+import { VariantIconProps } from '@/interfaces/icon';
 
-const MailIcon = ({ variant = 'outline', ...props }: IconProps) => {
+const MailIcon = ({ variant = 'outline', ...props }: VariantIconProps) => {
   return variant === 'solid' ? (
     <svg
       {...props}

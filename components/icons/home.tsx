@@ -1,6 +1,6 @@
-import { IconProps } from '@/types/icon';
+import { VariantIconProps } from '@/interfaces/icon';
 
-const HomeIcon = ({ variant, ...props }: IconProps) => {
+const HomeIcon = ({ variant, ...props }: VariantIconProps) => {
   if (variant === 'solid') {
     return (
       <>
