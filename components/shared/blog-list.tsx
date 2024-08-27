@@ -1,16 +1,16 @@
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { db } from "@/db";
-import { posts, PostSelect } from "@/db/schema";
-import { formatDate } from "@/lib/utils";
-import Link from "next/link";
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { db } from '@/db';
+import { posts, PostSelect } from '@/db/schema';
+import { formatDate } from '@/lib/utils';
+import Link from 'next/link';
 
 type Props = {
   title: string;
   linkPrefix: string;
-}
+};
 
-const BlogListView = async ({ title, linkPrefix }: Props) => {
+const BlogList = async ({ title, linkPrefix }: Props) => {
   const postsData: Omit<PostSelect, 'content' | 'cover'>[] = await db
     .select({
       id: posts.id,
@@ -24,7 +24,8 @@ const BlogListView = async ({ title, linkPrefix }: Props) => {
   return (
     <>
       <h2 className="text-3xl font-bold">
-        {title}<span className="text-primary">.</span>
+        {title}
+        <span className="text-primary">.</span>
       </h2>
       <div className="flex flex-col gap-5">
         {postsData.map((item) => (
@@ -44,6 +45,6 @@ const BlogListView = async ({ title, linkPrefix }: Props) => {
       </div>
     </>
   );
-}
+};
 
-export default BlogListView;
+export default BlogList;
