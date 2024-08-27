@@ -49,5 +49,9 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '' }
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-  return <Button disabled={pending}>Submit</Button>
+  return (
+    <Button disabled={pending}>
+      {pending ? 'Submitting...' : 'Submit'}
+    </Button>
+  )
 }

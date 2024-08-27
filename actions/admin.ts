@@ -1,6 +1,6 @@
 import { AdminBlogFormState, AdminBlogSchema } from "@/zod_schemas/admin";
 
-export default function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
+export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
   const validatedFields = AdminBlogSchema.safeParse({
     update: formData.get('update') === 'on',
     title: formData.get('title'),
@@ -15,5 +15,9 @@ export default function adminBlogSubmit(state: AdminBlogFormState, formData: For
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
-}
 
+  await new Promise(resolve => setTimeout(() => {
+    console.log('Done');
+    resolve('donw');
+  }, 2000));
+}
