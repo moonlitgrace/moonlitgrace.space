@@ -2,8 +2,8 @@ import MoonlitGraceArt from '@/components/main/moonlitgrace-art';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Home.space',
-  description: 'a graceful space',
+  title: 'Moonlitgrace',
+  description: 'Step into Moonlitgrace, where a passionate web developer and open-source contributor shares insights, projects, and creativity—all under the alias Moonlitgrace.',
 };
 
 export default function Home() {
