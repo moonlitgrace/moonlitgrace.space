@@ -1,5 +1,5 @@
-import Markdown from '@/components/markdown';
-import TableOfContents from '@/components/toc';
+import Markdown from '@/components/shared/markdown';
+import TableOfContents from '@/components/main/toc';
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';

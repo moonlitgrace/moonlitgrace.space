@@ -1,4 +1,4 @@
-import MoonlitGraceArt from '@/components/moonlitgrace-art';
+import MoonlitGraceArt from '@/components/main/moonlitgrace-art';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
