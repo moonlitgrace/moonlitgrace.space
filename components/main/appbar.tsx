@@ -26,10 +26,10 @@ const Appbar = () => {
         icon: HomeIcon,
         label: 'Home',
       },
-      writings: {
-        href: '/writings',
+      blog: {
+        href: '/blog',
         icon: PencilIcon,
-        label: 'Writings',
+        label: 'Blog',
       },
     },
     socials: {
