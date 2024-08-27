@@ -7,8 +7,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Blog.space',
-  description: 'my graceful thoughts',
+  title: 'Blog | Moonlitgrace',
+  description: 'Dive into the Blog at Moonlitgrace, where a passionate web developer and open-source contributor shares thoughts, tutorials, and insights—all under the alias Moonlitgrace.',
 };
 
 export default async function BlogPage() {
