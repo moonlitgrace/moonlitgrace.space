@@ -11,7 +11,7 @@ import PencilIcon from '@/components/icons/pencil';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
-import { useScreenDevice } from '@/hooks/useScreenDevice';
+import { useScreenDevice } from '@/hooks/use-screen-detector';
 import { cn } from '@/lib/utils';
 
 const Appbar = () => {
