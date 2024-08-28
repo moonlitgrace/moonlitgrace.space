@@ -39,3 +39,15 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ message: 'Data update failed' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  const data: { postId: string } = await request.json();
+
+  try {
+    await db.delete(posts).where(eq(posts.id, Number(data.postId)));
+    return NextResponse.json({ message: 'Deleted successfully!' });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ message: 'Deletion failed!' });
+  }
+}

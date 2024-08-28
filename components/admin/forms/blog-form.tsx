@@ -23,24 +23,24 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
       {/* hidden fields */}
       <input type="hidden" name="id" value={id?.toString() || ''} />
 
-      <div className="grid w-full items-center gap-2">
+      <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="title">Title</Label>
         <Input type="text" id="title" name="title" placeholder="Title" defaultValue={title} />
         <p className="text-sm text-muted-foreground">{title}</p>
       </div>
       <div className="flex items-start gap-4">
-        <div className="grid w-full items-center gap-2">
+        <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="cover">Cover</Label>
           <Input id="cover" type="file" name="cover" />
           <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
         </div>
-        <div className="grid w-max items-center gap-2">
+        <div className="grid w-max items-center gap-1.5">
           <Label htmlFor="tag">Tag</Label>
           <Input type="text" id="tag" name="tag" placeholder="Tag" defaultValue={tag} />
           <p className="text-sm text-muted-foreground">{tag}</p>
         </div>
       </div>
-      <div className="grid w-full gap-2">
+      <div className="grid w-full gap-1.5">
         <Label htmlFor="content">Content</Label>
         <Textarea
           className="h-60"
