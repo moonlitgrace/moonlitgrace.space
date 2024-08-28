@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
 
-export async function PATCH(request: NextRequest) {
+export async function POST(request: NextRequest) {
   const data: AdminBlogData = await request.json();
   const isToUpdate = data.id !== undefined;
 

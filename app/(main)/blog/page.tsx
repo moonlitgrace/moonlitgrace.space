@@ -5,6 +5,7 @@ import { posts, PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { desc } from 'drizzle-orm';
 
 export const metadata: Metadata = {
   title: 'Blog | Moonlitgrace',
@@ -21,7 +22,8 @@ export default async function BlogPage() {
       tag: posts.tag,
       createdAt: posts.createdAt,
     })
-    .from(posts);
+    .from(posts)
+    .orderBy(desc(posts.createdAt));
 
   return (
     <>
