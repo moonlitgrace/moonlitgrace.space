@@ -1,4 +1,4 @@
-import Adminbar from '@/components/admin/adminbar';
+import AdminBar from "@/components/admin/AdminBar";
 
 export default function ProtectedLayout({
   children,
@@ -7,7 +7,7 @@ export default function ProtectedLayout({
 }>) {
   return (
     <main className="mb-40 mt-10 flex w-full flex-col gap-10 md:mb-10">
-      <Adminbar />
+      <AdminBar />
       {children}
     </main>
   );

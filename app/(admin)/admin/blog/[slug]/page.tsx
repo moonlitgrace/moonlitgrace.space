@@ -1,4 +1,4 @@
-import AdminBlogForm from '@/components/admin/forms/blog-form';
+import AdminBlogForm from '@/components/admin/forms/BlogForm';
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
 import { eq } from 'drizzle-orm';

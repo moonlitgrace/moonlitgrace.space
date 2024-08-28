@@ -11,10 +11,10 @@ import PencilIcon from '@/components/icons/pencil';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
-import { useScreenDevice } from '@/hooks/use-screen-detector';
+import { useScreenDevice } from '@/hooks/useScreenDevice';
 import { cn } from '@/lib/utils';
 
-const Appbar = () => {
+const AppBar = () => {
   const pathname = usePathname();
 
   const { isMobile } = useScreenDevice();
@@ -102,4 +102,4 @@ const Appbar = () => {
   );
 };
 
-export default Appbar;
+export default AppBar;
