@@ -26,6 +26,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
       <div className="grid w-full items-center gap-2">
         <Label htmlFor="title">Title</Label>
         <Input type="text" id="title" name="title" placeholder="Title" defaultValue={title} />
+        <p className="text-sm text-muted-foreground">{title}</p>
       </div>
       <div className="flex items-start gap-4">
         <div className="grid w-full items-center gap-2">
@@ -36,6 +37,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
         <div className="grid w-max items-center gap-2">
           <Label htmlFor="tag">Tag</Label>
           <Input type="text" id="tag" name="tag" placeholder="Tag" defaultValue={tag} />
+          <p className="text-sm text-muted-foreground">{tag}</p>
         </div>
       </div>
       <div className="grid w-full gap-2">
