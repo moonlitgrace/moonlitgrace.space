@@ -1,12 +1,14 @@
-import { zodNonEmptyString } from "@/lib/zod";
-import { z } from "zod";
+import { zodNonEmptyString } from '@/lib/zod';
+import { z } from 'zod';
 
 export const AdminBlogSchema = z.object({
-  update: z.boolean(),
+  id: z.number().optional(),
   title: zodNonEmptyString('title'),
   tag: zodNonEmptyString('tag'),
   content: zodNonEmptyString('content'),
 });
+
+export type AdminBlogData = z.infer<typeof AdminBlogSchema>;
 
 export type AdminBlogFormState =
   | {
@@ -16,4 +18,5 @@ export type AdminBlogFormState =
       content?: string[];
     };
     message?: string;
-  } | undefined;
+  }
+  | undefined;

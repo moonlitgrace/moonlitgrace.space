@@ -1,23 +1,38 @@
-import { AdminBlogFormState, AdminBlogSchema } from "@/zod_schemas/admin";
+import { AdminBlogFormState, AdminBlogSchema } from '@/zod_schemas/admin';
 
 export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
   const validatedFields = AdminBlogSchema.safeParse({
-    update: formData.get('update') === 'on',
+    id: formData.get('id') ? Number(formData.get('id')) : undefined,
     title: formData.get('title'),
     tag: formData.get('tag'),
     content: formData.get('content'),
-  })
-
-  console.log(validatedFields.data)
+  });
 
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-    }
+    };
   }
 
-  await new Promise(resolve => setTimeout(() => {
-    console.log('Done');
-    resolve('donw');
-  }, 2000));
+  try {
+    const res = await fetch('/api/blog', {
+      method: 'PATCH',
+      body: JSON.stringify(validatedFields.data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      return { message: err }
+    }
+
+    const data = await res.json();
+    return { message: data }
+
+  } catch (err) {
+    console.error(err);
+    return { message: 'API call failed' }
+  }
 }
