@@ -7,10 +7,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import PencilIcon from '@/components/icons/pencil';
-import { useScreenDevice } from '@/hooks/use-screen-detector';
+import { useScreenDevice } from '@/hooks/useScreenDevice';
 import HomeIcon from '@/components/icons/home';
 
-const Adminbar = () => {
+const AdminBar = () => {
   const pathname = usePathname();
 
   const { isMobile } = useScreenDevice();
@@ -60,4 +60,4 @@ const Adminbar = () => {
   );
 };
 
-export default Adminbar;
+export default AdminBar;

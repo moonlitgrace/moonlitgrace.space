@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import AdminBlogDeleteButton from '@/app/_components/_admin/blog-delete-button';
+import AdminBlogDeleteButton from '@/app/_components/_admin/BlogDeleteButton';
 
 export default async function AdminBlogPage() {
   const postsData: Omit<PostSelect, 'content' | 'cover' | 'createdAt'>[] = await db

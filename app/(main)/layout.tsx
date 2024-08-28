@@ -1,4 +1,4 @@
-import Appbar from '@/components/main/appbar';
+import AppBar from "@/components/main/AppBar";
 
 export default function MainLayout({
   children,
@@ -8,7 +8,7 @@ export default function MainLayout({
   return (
     <>
       {children}
-      <Appbar />
+      <AppBar />
     </>
   );
 }
