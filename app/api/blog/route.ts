@@ -48,6 +48,6 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'Deleted successfully!' });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ message: 'Deletion failed!' });
+    return NextResponse.json({ message: 'Deletion failed!' }, { status: 500 });
   }
 }
