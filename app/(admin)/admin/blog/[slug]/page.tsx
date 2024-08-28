@@ -14,6 +14,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       title={postData.title}
       tag={postData.tag}
       content={postData.content}
+      cover={postData.cover}
     />
   );
 }
