@@ -6,17 +6,18 @@ export const AdminBlogSchema = z.object({
   title: zodNonEmptyString('title'),
   tag: zodNonEmptyString('tag'),
   content: zodNonEmptyString('content'),
+  cover: z.string().nullable().optional(),
 });
 
 export type AdminBlogData = z.infer<typeof AdminBlogSchema>;
 
 export type AdminBlogFormState =
   | {
-    errors?: {
-      title?: string[];
-      tag?: string[];
-      content?: string[];
-    };
-    message?: string;
-  }
+      errors?: {
+        title?: string[];
+        tag?: string[];
+        content?: string[];
+      };
+      message?: string;
+    }
   | undefined;

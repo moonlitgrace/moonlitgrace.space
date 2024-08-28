@@ -12,20 +12,26 @@ type Props = {
   title?: string;
   tag?: string;
   content?: string;
+  cover?: string | null;
 };
 
-export default function AdminBlogForm({ id, title = '', tag = '', content = '' }: Props) {
+export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
 
   return (
     <form className="flex flex-col gap-5" action={action}>
       {/* hidden fields */}
-      <input type='hidden' name='id' value={id?.toString() || ''} />
+      <input type="hidden" name="id" value={id?.toString() || ''} />
 
-      <div className="flex gap-4">
+      <div className="grid w-full items-center gap-2">
+        <Label htmlFor="title">Title</Label>
+        <Input type="text" id="title" name="title" placeholder="Title" defaultValue={title} />
+      </div>
+      <div className="flex items-start gap-4">
         <div className="grid w-full items-center gap-2">
-          <Label htmlFor="title">Title</Label>
-          <Input type="text" id="title" name="title" placeholder="Title" defaultValue={title} />
+          <Label htmlFor="cover">Cover</Label>
+          <Input id="cover" type="file" name="cover" />
+          <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
         </div>
         <div className="grid w-max items-center gap-2">
           <Label htmlFor="tag">Tag</Label>
@@ -35,7 +41,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '' }
       <div className="grid w-full gap-2">
         <Label htmlFor="content">Content</Label>
         <Textarea
-          className="h-96"
+          className="h-60"
           placeholder="Type content here."
           id="content"
           name="content"

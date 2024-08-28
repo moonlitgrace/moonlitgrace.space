@@ -9,6 +9,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
   });
 
   if (!validatedFields.success) {
+    console.log(validatedFields.error);
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     };
@@ -25,14 +26,13 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
 
     if (!res.ok) {
       const err = await res.json();
-      return { message: err }
+      return { message: err };
     }
 
     const data = await res.json();
-    return { message: data }
-
+    return { message: data };
   } catch (err) {
     console.error(err);
-    return { message: 'API call failed' }
+    return { message: 'API call failed' };
   }
 }
