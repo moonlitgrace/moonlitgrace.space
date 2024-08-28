@@ -17,7 +17,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
 
   try {
     const res = await fetch('/api/blog', {
-      method: 'PATCH',
+      method: 'POST',
       body: JSON.stringify(validatedFields.data),
       headers: {
         'Content-Type': 'application/json',
@@ -29,8 +29,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
       return { message: err };
     }
 
-    const data = await res.json();
-    return { message: data };
+    return { message: 'success' };
   } catch (err) {
     console.error(err);
     return { message: 'API call failed' };

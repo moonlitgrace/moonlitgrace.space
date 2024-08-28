@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { revalidatePathClient } from '@/helpers/revalidate';
 import { useState } from 'react';
 
 export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
@@ -18,6 +19,8 @@ export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
             'Content-Type': 'application/json',
           },
         });
+
+        revalidatePathClient('/admin/blog');
       }
     } catch (err) {
       console.error(err);

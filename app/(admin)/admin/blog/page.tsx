@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import AdminBlogDeleteButton from '@/app/_components/_admin/BlogDeleteButton';
+import { desc } from 'drizzle-orm';
 
 export default async function AdminBlogPage() {
   const postsData: Omit<PostSelect, 'content' | 'cover' | 'createdAt'>[] = await db
@@ -21,7 +22,8 @@ export default async function AdminBlogPage() {
       slug: posts.slug,
       tag: posts.tag,
     })
-    .from(posts);
+    .from(posts)
+    .orderBy(desc(posts.createdAt));
 
   return (
     <>
@@ -45,7 +47,7 @@ export default async function AdminBlogPage() {
         </TableHeader>
         <TableBody>
           {postsData.map((post) => (
-            <TableRow>
+            <TableRow key={post.id}>
               <TableCell>{post.id}</TableCell>
               <TableCell className="font-medium">
                 <Link href={`/blog/${post.slug}`} className="underline">

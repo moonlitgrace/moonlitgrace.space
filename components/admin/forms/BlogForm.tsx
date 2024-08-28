@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 
 type Props = {
@@ -17,6 +19,13 @@ type Props = {
 
 export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.message === 'success') {
+      router.push('/admin/blog');
+    }
+  }, [state, router]);
 
   return (
     <form className="flex flex-col gap-5" action={action}>
