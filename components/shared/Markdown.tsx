@@ -3,7 +3,7 @@ import { markedHighlight } from 'marked-highlight';
 import DOMPurify from 'isomorphic-dompurify';
 
 import hljs from 'highlight.js/lib/core';
-import '@/styles/highlight.js/github-dark.css';
+import '@/styles/hljs/github-dark.css';
 import { escapeText } from '@/lib/utils';
 
 const languages = {

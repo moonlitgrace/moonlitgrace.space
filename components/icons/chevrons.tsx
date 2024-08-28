@@ -1,6 +1,6 @@
-import { IconWithoutVariantsProps } from '@/types/icon';
+import { IconProps } from '@/interfaces/icon';
 
-const Chevrons = (props: IconWithoutVariantsProps) => {
+const Chevrons = (props: IconProps) => {
   return (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
       <path

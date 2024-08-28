@@ -14,7 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { useScreenDevice } from '@/hooks/useScreenDevice';
 import { cn } from '@/lib/utils';
 
-const Appbar = () => {
+const AppBar = () => {
   const pathname = usePathname();
 
   const { isMobile } = useScreenDevice();
@@ -26,10 +26,10 @@ const Appbar = () => {
         icon: HomeIcon,
         label: 'Home',
       },
-      writings: {
-        href: '/writings',
+      blog: {
+        href: '/blog',
         icon: PencilIcon,
-        label: 'Writings',
+        label: 'Blog',
       },
     },
     socials: {
@@ -102,4 +102,4 @@ const Appbar = () => {
   );
 };
 
-export default Appbar;
+export default AppBar;

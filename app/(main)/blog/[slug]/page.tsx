@@ -1,5 +1,3 @@
-import Markdown from '@/components/markdown';
-import TableOfContents from '@/components/toc';
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';
@@ -9,6 +7,8 @@ import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
+import Markdown from '@/components/shared/Markdown';
+import TableOfContents from '@/components/main/TableOfContents';
 
 export async function generateMetadata({
   params,
