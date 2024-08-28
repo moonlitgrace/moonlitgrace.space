@@ -10,10 +10,11 @@
     "format": "prettier . --write",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:seed": "node ./db/seed/seed.js",
+    "db:seed": "npx tsx ./db/seed/seed.ts",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-separator": "^1.1.0",
