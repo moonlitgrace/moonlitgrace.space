@@ -1,6 +1,6 @@
-import { IconProps } from '@/types/icon';
+import { VariantIconProps } from '@/interfaces/icon';
 
-const GithubIcon = ({ variant = 'outline', ...props }: IconProps) => {
+const GithubIcon = ({ variant = 'outline', ...props }: VariantIconProps) => {
   return variant === 'solid' ? (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
       <g fill="none">
