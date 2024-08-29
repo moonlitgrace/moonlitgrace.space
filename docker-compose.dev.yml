@@ -19,6 +19,8 @@ services:
       dockerfile: ./docker/Dockerfile.dev
     env_file:
       - ./env/.env.dev
+    environment:
+      - NODE_ENV=development
     volumes:
       - .:/app
     restart: always
