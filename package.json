@@ -26,10 +26,12 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.33.0",
     "isomorphic-dompurify": "^2.15.0",
+    "jose": "^5.8.0",
     "next": "14.2.7",
     "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18",
+    "server-only": "^0.0.1",
     "slugify": "^1.6.6",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
@@ -37,6 +39,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.4.1",
     "@commitlint/config-conventional": "^19.4.1",
+    "@hookform/resolvers": "^3.9.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22",
     "@types/react": "^18",
