@@ -2,13 +2,12 @@ import 'server-only';
 
 import { SignJWT, jwtVerify } from 'jose';
 import { env } from '@/lib/env';
+import { cookies } from 'next/headers';
 
 const secretKey = env.SECRET_KEY;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
-  console.log(payload);
-
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -16,7 +15,7 @@ export async function encrypt(payload: any) {
     .sign(encodedKey);
 }
 
-export async function decrypy(session: string | undefined = '') {
+export async function decrypt(session: string | undefined = '') {
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ['HS256'],
@@ -25,4 +24,17 @@ export async function decrypy(session: string | undefined = '') {
   } catch (err) {
     console.error('Failed to verify session: ', err);
   }
+}
+
+export async function createSession(username: string) {
+  const expireTime = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const session = await encrypt({ username, expireTime });
+
+  cookies().set('session', session, {
+    httpOnly: true,
+    secure: true,
+    expires: expireTime,
+    sameSite: 'lax',
+    path: '/',
+  });
 }

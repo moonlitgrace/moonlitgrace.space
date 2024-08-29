@@ -1,6 +1,8 @@
 import { AdminBlogFormState, AdminBlogSchema } from '@/zod_schemas/admin';
 
 export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
+  console.log(state);
+
   const validatedFields = AdminBlogSchema.safeParse({
     id: formData.get('id') ? Number(formData.get('id')) : undefined,
     title: formData.get('title'),
