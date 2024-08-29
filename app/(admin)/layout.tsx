@@ -1,4 +1,4 @@
-import AdminBar from "@/components/admin/AdminBar";
+import AdminBar from '@/components/admin/AdminBar';
 
 export default function ProtectedLayout({
   children,
