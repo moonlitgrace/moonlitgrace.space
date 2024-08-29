@@ -1,6 +1,6 @@
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from "./app/_lib/session";
+import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import { decrypt } from './app/_lib/session';
 
 export default async function middleware(request: NextRequest) {
   const cookie = cookies().get('session')?.value;
@@ -20,4 +20,4 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: '/admin/:path*',
-}
+};
