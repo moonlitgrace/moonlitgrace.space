@@ -3,26 +3,38 @@ FROM node:20-slim as base
 
 WORKDIR /app
 
+FROM base as deps
+
 COPY package*.json ./
+
+RUN npm ci
 
 # Builder image
 FROM base as builder
 
-RUN npm ci --production --no-audit --ignore-scripts --no-fund
-
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Run database migrations and seed the database before building
+RUN npm run db:generate
+RUN npm run db:migrate
 
 RUN npm run build
 
 # Final image
 FROM base as runner
 
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
+ENV NODE_ENV=production
+# Disable nextjs telemetary
+ENV NEXT_TELEMETRY_DISABLED 1
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+# COPY --from=builder /app/node_modules ./node_modules
+# COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/public ./public
 
 # Disable nextjs telemetary
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["npm", "run", "start"]
+CMD ["node", "server.js"]
