@@ -1,5 +1,5 @@
+import './env-config';
 import { defineConfig } from 'drizzle-kit';
-// import { env } from '@/lib/env';
 
 console.log(process.env.DATABASE_URL);
 

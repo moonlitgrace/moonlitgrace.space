@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.prod
-    env_file:
-      - ./env/.env.prod
     restart: always
     ports:
       - 3000:3000
