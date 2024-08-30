@@ -1,7 +1,6 @@
 'use server';
 
 import { createSession } from '@/app/_lib/session';
-// import { env } from '@/lib/env';
 import { AuthFormState, AuthSchema } from '@/zod_schemas/auth';
 import { redirect } from 'next/navigation';
 
