@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import AdminBlogDeleteButton from '@/app/_components/_admin/BlogDeleteButton';
 import { desc } from 'drizzle-orm';
-import { db } from '@/db/index';
+import { db } from '@/db';
 
 export default async function AdminBlogPage() {
   const postsData: Omit<PostSelect, 'content' | 'cover' | 'createdAt'>[] = await db
