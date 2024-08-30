@@ -1,10 +1,10 @@
 import 'server-only';
 
 import { SignJWT, jwtVerify } from 'jose';
-import { env } from '@/lib/env';
+// import { env } from '@/lib/env';
 import { cookies } from 'next/headers';
 
-const secretKey = env.SECRET_KEY;
+const secretKey = process.env.SECRET_KEY;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {

@@ -1,4 +1,4 @@
-import { db } from '@/db';
+import { db } from '@/db/index';
 import { posts } from '@/db/schema';
 import { count } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
