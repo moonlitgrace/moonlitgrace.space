@@ -1,7 +1,7 @@
 'use server';
 
 import { createSession } from '@/app/_lib/session';
-import { env } from '@/lib/env';
+// import { env } from '@/lib/env';
 import { AuthFormState, AuthSchema } from '@/zod_schemas/auth';
 import { redirect } from 'next/navigation';
 
@@ -19,11 +19,11 @@ export async function login(state: AuthFormState, formData: FormData) {
     };
   }
 
-  if (data.username !== env.ADMIN_USERNAME) {
+  if (data.username !== process.env.ADMIN_USERNAME) {
     return {
       errors: { username: ['Invalid username'] },
     };
-  } else if (data.password !== env.ADMIN_PASSWORD) {
+  } else if (data.password !== process.env.ADMIN_PASSWORD) {
     return {
       errors: { password: ['Invalid password'] },
     };

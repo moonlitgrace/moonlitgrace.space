@@ -1,4 +1,4 @@
-import { db } from '@/db';
+import { db } from '@/db/index';
 import { posts, PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';
 import { eq } from 'drizzle-orm';
