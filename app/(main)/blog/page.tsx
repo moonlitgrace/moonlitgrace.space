@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { db } from '@/db/index';
+import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';

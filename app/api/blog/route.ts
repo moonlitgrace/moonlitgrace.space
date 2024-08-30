@@ -1,4 +1,4 @@
-import { db } from '@/db/index';
+import { db } from '@/db';
 import { posts } from '@/db/schema';
 import { AdminBlogData } from '@/zod_schemas/admin';
 import { eq } from 'drizzle-orm';
