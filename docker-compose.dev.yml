@@ -17,6 +17,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.dev
+    env_file:
+      - ./.env.development
     volumes:
       - .:/app
     restart: always
