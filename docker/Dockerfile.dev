@@ -1,18 +1,15 @@
 FROM node:20-slim
 
 WORKDIR /app
-# https://esbuild.github.io/getting-started/#simultaneous-platforms
-COPY package.json ./
 
+COPY package*.json ./
+# https://esbuild.github.io/getting-started/#simultaneous-platforms
 RUN npm i --verbose
 
 COPY . .
-
-# Run db migrations
-RUN npm run db:generate
-RUN npm run db:migrate
+COPY docker-entrypoint.sh ./
 
 # Disable nextjs telemetary
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["npm", "run", "dev"]
+ENTRYPOINT ["sh", "./docker-entrypoint.sh"]
