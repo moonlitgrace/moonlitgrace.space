@@ -1,10 +1,10 @@
 FROM node:20-slim
 
 WORKDIR /app
+# https://esbuild.github.io/getting-started/#simultaneous-platforms
+COPY package.json ./
 
-COPY package*.json ./
-
-RUN npm ci --verbose
+RUN npm i --verbose
 
 COPY . .
 
