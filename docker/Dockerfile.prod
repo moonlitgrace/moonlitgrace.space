@@ -8,9 +8,9 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # Dependency manage
 FROM base as deps
 
-COPY package*.json ./
+COPY package.json ./
 
-RUN npm ci
+RUN npm i --verbose
 
 # Builder image
 FROM base as builder
