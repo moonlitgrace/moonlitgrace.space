@@ -8,6 +8,10 @@ RUN npm i --verbose
 
 COPY . .
 
+# Run db migrations
+RUN npm run db:generate
+RUN npm run db:migrate
+
 # Disable nextjs telemetary
 ENV NEXT_TELEMETRY_DISABLED 1
 
