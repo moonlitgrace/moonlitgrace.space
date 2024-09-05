@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Print waiting message
-echo "Waiting for the database...\n"
+echo "\nWaiting for the database...\n"
 # Wait for PostgreSQL to be ready
 ./scripts/wait-for-it.sh db:5432 -t 30 -- echo "Database is up"
 
