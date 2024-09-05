@@ -6,4 +6,3 @@ namespace NodeJS {
     ADMIN_PASSWORD: string;
   }
 }
-
