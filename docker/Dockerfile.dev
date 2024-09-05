@@ -12,7 +12,7 @@ COPY docker-entrypoint.sh ./docker-entrypoint.sh
 COPY scripts/wait-for-it.sh ./scripts/wait-for-it.sh
 
 # https://stackoverflow.com/a/56791772/26860113
-RUN sed -i 's/\r$//' ./docker-entrypoint.sh
+RUN sed -i 's/\r$//' ./docker-entrypoint.sh ./scripts/wait-for-it.sh
 
 # Disable nextjs telemetary
 ENV NEXT_TELEMETRY_DISABLED 1

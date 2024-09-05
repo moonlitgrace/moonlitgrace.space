@@ -19,19 +19,21 @@ This is a containerized next.js app, so I recommend you to run it with docker or
 
 ### Basic Steps
 
-* `git clone https://github.com/moonlitgrace/space moonlitspace`
-* `cd moonlitspace`
-* `npm i`
+- `git clone https://github.com/moonlitgrace/space moonlitspace`
+- `cd moonlitspace`
+- `npm i`
 
 ### Configure environment variables
 
 From repo you will get 3 `.env` files such as:
-* `.env.development`
-* `.env.example`
-* `.env.local.example`
+
+- `.env.development`
+- `.env.example`
+- `.env.local.example`
 
 For development you only have to change `.env.local.example` like:
-* First create `.env.local` with:
+
+- First create `.env.local` with:
   `cp .env.local.example .env.local`
 
 For `SECRET_KEY` you can use anything since it is for development. You can use this `openssl rand -base64 32` to create for production.
