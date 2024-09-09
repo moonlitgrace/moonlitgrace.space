@@ -33,7 +33,7 @@
     "isomorphic-dompurify": "^2.15.0",
     "jose": "^5.8.0",
     "markdown-to-text": "^0.1.1",
-    "marked": "^14.1.1",
+    "marked": "^14.1.2",
     "marked-highlight": "^2.1.4",
     "next": "14.2.8",
     "postgres": "^3.4.4",
