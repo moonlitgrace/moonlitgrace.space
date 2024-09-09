@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "Dockerfile*": "dockerfile",
+    ".env*": "shellscript"
+  },
+  "editor.tabSize": 4
+}
