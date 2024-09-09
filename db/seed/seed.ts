@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { db } from '@/db';
 import { posts } from '@/db/schema';
 import { postsMockData } from './mock/posts';
@@ -18,4 +19,4 @@ async function main() {
   }
 }
 
-main();
+// main();
