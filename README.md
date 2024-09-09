@@ -1,4 +1,4 @@
-# [moonlitgrace.space](https://moonlitgrace.space)
+# moonlitgrace.space
 
 Step into Moonlitgrace, where a passionate web developer and open-source contributor shares insights, projects, and creativity—all under the alias Moonlitgrace.
 
