@@ -6,5 +6,6 @@
   "file_types": {
     "Dockerfile": ["Dockerfile*"],
     "Shell Script": [".env*"]
-  }
+  },
+  "tab_size": 2
 }
