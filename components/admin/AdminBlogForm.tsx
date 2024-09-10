@@ -6,8 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Markdown from '../shared/Markdown';
 
 type Props = {
   id?: number;
@@ -19,6 +21,7 @@ type Props = {
 
 export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
+  const [contentState, setContentState] = useState(content);
   const router = useRouter();
 
   useEffect(() => {
@@ -28,39 +31,67 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
   }, [state, router]);
 
   return (
-    <form className="flex flex-col gap-5" action={action}>
-      {/* hidden fields */}
-      <input type="hidden" name="id" value={id?.toString() || ''} />
+    <>
+      <h2 className="text-3xl font-bold">
+        New Post
+        <span className="text-primary">.</span>
+      </h2>
+      <form className="flex flex-col gap-3" action={action}>
+        {/* hidden fields */}
+        <input type="hidden" name="id" value={id?.toString() || ''} />
 
-      <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="title">Title</Label>
-        <Input type="text" id="title" name="title" placeholder="Title" defaultValue={title} />
-        <p className="text-sm text-muted-foreground">{title}</p>
-      </div>
-      <div className="flex items-start gap-4">
         <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="cover">Cover</Label>
-          <Input id="cover" type="file" name="cover" />
-          <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
+          <Input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter post title..."
+            defaultValue={title}
+          />
+          <p className="text-sm text-muted-foreground">{title}</p>
         </div>
-        <div className="grid w-max items-center gap-1.5">
-          <Label htmlFor="tag">Tag</Label>
-          <Input type="text" id="tag" name="tag" placeholder="Tag" defaultValue={tag} />
-          <p className="text-sm text-muted-foreground">{tag}</p>
+        <div className="flex items-start gap-4">
+          <div className="grid w-full items-center gap-1.5">
+            <Input id="cover" type="file" name="cover" />
+            <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
+          </div>
+          <div className="grid w-max items-center gap-1.5">
+            <Input
+              type="text"
+              id="tag"
+              name="tag"
+              placeholder="Enter post tag..."
+              defaultValue={tag}
+            />
+            <p className="text-sm text-muted-foreground">{tag}</p>
+          </div>
         </div>
-      </div>
-      <div className="grid w-full gap-1.5">
-        <Label htmlFor="content">Content</Label>
-        <Textarea
-          className="h-60"
-          placeholder="Type content here."
-          id="content"
-          name="content"
-          defaultValue={content}
-        />
-      </div>
-      <SubmitButton />
-    </form>
+        <div className="grid w-full gap-1.5">
+          <Tabs defaultValue="content">
+            <TabsList>
+              <TabsTrigger value="content">Content</TabsTrigger>
+              <TabsTrigger value="preview">Preview</TabsTrigger>
+            </TabsList>
+            <TabsContent value="content">
+              <Textarea
+                className="h-40"
+                placeholder="Type content here."
+                id="content"
+                name="content"
+                value={contentState}
+                onChange={(e) => setContentState(e.target.value)}
+              />
+            </TabsContent>
+            <TabsContent value="preview">
+              <div className="rounded-md border border-input p-3">
+                <Markdown markdown={contentState} />
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+        <SubmitButton />
+      </form>
+    </>
   );
 }
 
