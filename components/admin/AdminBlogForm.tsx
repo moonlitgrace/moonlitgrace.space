@@ -21,9 +21,25 @@ type Props = {
 
 export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
+  const [coverImage, setCoverImage] = useState(null);
   const [contentState, setContentState] = useState(content);
   const router = useRouter();
 
+  // Form to Upload Files
+  const handleUpload = async () => {
+    console.log(coverImage);
+    const data = new FormData();
+    data.append('file', coverImage);
+    const res = await fetch('/api/cloudinary', {
+      method: 'POST',
+      body: data,
+    });
+
+    const output = await res.json();
+    console.log(output);
+    // This is the  url using for show image upload in cloudinary
+    // const cloudinaryUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1626459734/sample.jpg`;
+  };
   useEffect(() => {
     if (state?.message === 'success') {
       router.push('/admin/blog');
@@ -52,7 +68,12 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
         </div>
         <div className="flex items-start gap-4">
           <div className="grid w-full items-center gap-1.5">
-            <Input id="cover" type="file" name="cover" />
+            <Input
+              id="cover"
+              type="file"
+              name="cover"
+              onClick={(e: any) => setCoverImage(e.target.files[0])}
+            />
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
           </div>
           <div className="grid w-max items-center gap-1.5">
