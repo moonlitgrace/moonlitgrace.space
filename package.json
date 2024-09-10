@@ -57,7 +57,7 @@
     "cross-env": "^7.0.3",
     "drizzle-kit": "^0.24.2",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.8",
+    "eslint-config-next": "^14.2.9",
     "husky": "^9.1.5",
     "lint-staged": "^15.2.10",
     "postcss": "^8",
