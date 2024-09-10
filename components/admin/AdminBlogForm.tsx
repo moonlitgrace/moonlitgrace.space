@@ -21,18 +21,25 @@ type Props = {
 
 export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
-  const [coverImage, setCoverImage] = useState(null);
+  const [coverImage, setCoverImage] = useState<File | null>(null);
   const [contentState, setContentState] = useState(content);
   const router = useRouter();
 
   // Form to Upload Files
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setCoverImage(file);
+    console.log(file, '==file');
+  };
   const handleUpload = async () => {
     console.log(coverImage);
-    const data = new FormData();
-    data.append('file', coverImage);
+    if (!coverImage) return;
+    const formData = new FormData();
+    formData.append('file', coverImage);
+
     const res = await fetch('/api/cloudinary', {
       method: 'POST',
-      body: data,
+      body: formData,
     });
 
     const output = await res.json();
@@ -68,12 +75,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
         </div>
         <div className="flex items-start gap-4">
           <div className="grid w-full items-center gap-1.5">
-            <Input
-              id="cover"
-              type="file"
-              name="cover"
-              onClick={(e: any) => setCoverImage(e.target.files[0])}
-            />
+            <Input id="cover" type="file" name="cover" onChange={handleFileChange} />
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
           </div>
           <div className="grid w-max items-center gap-1.5">
