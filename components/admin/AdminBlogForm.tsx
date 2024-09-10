@@ -84,12 +84,19 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
             </TabsContent>
             <TabsContent value="preview">
               <div className="rounded-md border border-input p-3">
-                <Markdown markdown={contentState} />
+                {contentState ? (
+                  <Markdown markdown={contentState} />
+                ) : (
+                  <span className="text-sm">Nothing to preview...</span>
+                )}
               </div>
             </TabsContent>
           </Tabs>
         </div>
-        <SubmitButton />
+        <div className="flex gap-3">
+          <Button variant="secondary">Draft</Button>
+          <SubmitButton />
+        </div>
       </form>
     </>
   );
@@ -97,5 +104,9 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-  return <Button disabled={pending}>{pending ? 'Submitting...' : 'Submit'}</Button>;
+  return (
+    <Button className="w-full" disabled={pending}>
+      {pending ? 'Submitting...' : 'Submit'}
+    </Button>
+  );
 }
