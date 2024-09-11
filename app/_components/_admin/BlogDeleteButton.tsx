@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { revalidatePathClient } from '@/helpers/revalidate';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
