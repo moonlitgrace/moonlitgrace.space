@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '../shared/Markdown';
@@ -21,16 +21,17 @@ type Props = {
 
 export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
-  const [coverImage, setCoverImage] = useState<File | null>(null);
+  const [coverImage, setCoverImage] = useState<File>();
   const [contentState, setContentState] = useState(content);
+
   const router = useRouter();
 
-  // Form to Upload Files
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     setCoverImage(file);
     console.log(file, '==file');
   };
+
   const handleUpload = async () => {
     console.log(coverImage);
     if (!coverImage) return;
@@ -44,9 +45,8 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
 
     const output = await res.json();
     console.log(output);
-    // This is the  url using for show image upload in cloudinary
-    // const cloudinaryUrl = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1626459734/sample.jpg`;
   };
+
   useEffect(() => {
     if (state?.message === 'success') {
       router.push('/admin/blog');
@@ -98,7 +98,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
             <TabsContent value="content">
               <Textarea
                 className="h-40"
-                placeholder="Type content here."
+                placeholder="Type content here..."
                 id="content"
                 name="content"
                 value={contentState}
@@ -117,7 +117,9 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
           </Tabs>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary">Draft</Button>
+          <Button type="button" variant="secondary">
+            Draft
+          </Button>
           <SubmitButton />
         </div>
       </form>
