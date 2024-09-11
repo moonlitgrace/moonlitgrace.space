@@ -7,4 +7,4 @@ next-env.d.ts
 next.config.ts
 yarn.lock
 
-!.lintstagedrc.js
+!.lintstagedrc.mjs
