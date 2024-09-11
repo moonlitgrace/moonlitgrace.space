@@ -9,10 +9,11 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
 import AdminBlogDeleteButton from '@/app/_components/_admin/BlogDeleteButton';
 import { desc } from 'drizzle-orm';
 import { db } from '@/db';
+import PencilIcon from '@/components/icons/pencil';
+import { PlusIcon } from '@/components/icons/plus';
 
 export default async function AdminBlogPage() {
   const postsData: Omit<PostSelect, 'content' | 'cover' | 'createdAt'>[] = await db
@@ -32,9 +33,12 @@ export default async function AdminBlogPage() {
           Admin Blog
           <span className="text-primary">.</span>
         </h2>
-        <Button asChild>
-          <Link href="/admin/blog/new">New Post</Link>
-        </Button>
+        <Link href="/admin/blog/new">
+          <Button size="sm" className="gap-2">
+            <PlusIcon className="size-4" />
+            New Post
+          </Button>
+        </Link>
       </div>
       <Table>
         <TableHeader>
@@ -48,21 +52,19 @@ export default async function AdminBlogPage() {
         <TableBody>
           {postsData.map((post) => (
             <TableRow key={post.id}>
-              <TableCell>{post.id}</TableCell>
+              <TableCell className="font-bold text-primary">{post.id}.</TableCell>
               <TableCell className="font-medium">
                 <Link href={`/blog/${post.slug}`} className="underline">
                   {post.title}
                 </Link>
               </TableCell>
-              <TableCell>
-                <Badge className="capitalize" variant="secondary">
-                  {post.tag}
-                </Badge>
-              </TableCell>
-              <TableCell className="flex gap-4">
-                <Button size="sm">
-                  <Link href={`/admin/blog/${post.slug}`}>Edit</Link>
-                </Button>
+              <TableCell className="capitalize">{post.tag}</TableCell>
+              <TableCell className="flex justify-end gap-2">
+                <Link href={`/admin/blog/${post.slug}`}>
+                  <Button size="icon" className="size-8" variant="ghost">
+                    <PencilIcon variant="outline" className="size-4" />
+                  </Button>
+                </Link>
                 <AdminBlogDeleteButton postId={post.id} />
               </TableCell>
             </TableRow>

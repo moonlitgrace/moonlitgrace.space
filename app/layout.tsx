@@ -16,10 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn('dark container flex min-h-screen font-sans antialiased', fontSans.variable)}
-      >
-        {children}
+      <body className={cn('dark font-sans antialiased', fontSans.variable)}>
+        <main className={cn('container flex min-h-screen', fontSans.variable)}>{children}</main>
       </body>
     </html>
   );
