@@ -1,20 +1,24 @@
-// pages/api/upload.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+// app/api/cloudinary-upload/route.ts
+import { NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    try {
-      const file = req.body.file; // The base64 or URL of the file
-      const uploadResponse = await cloudinary.uploader.upload(file, {
-        upload_preset: 'your upload preset',
-      });
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
+    const file = formData.get('file') as File;
 
-      res.status(200).json({ success: true, data: uploadResponse });
-    } catch (error: any) {
-      res.status(500).json({ success: false, error: error.message });
+    if (!file) {
+      return NextResponse.json({ success: false, message: 'No file provided' }, { status: 400 });
     }
-  } else {
-    res.status(405).json({ success: false, message: 'Method not allowed' });
+
+    const buffer = await file.arrayBuffer();
+    const base64String = Buffer.from(buffer).toString('base64');
+    const base64Image = `data:${file.type};base64,${base64String}`;
+
+    const uploadResponse = await cloudinary.uploader.upload(base64Image);
+
+    return NextResponse.json({ success: true, data: uploadResponse.url });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
