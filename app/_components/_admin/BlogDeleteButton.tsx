@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { revalidatePathClient } from '@/helpers/revalidate';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,6 +15,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import TrashIcon from '@/components/icons/trash';
+import SpinnerIcon from '@/components/icons/spinner';
 
 export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
   const [pending, setPending] = useState(false);
@@ -22,18 +23,15 @@ export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
   async function handleDeleteBlog() {
     setPending(true);
     try {
-      const result = confirm(`Sure to delete blog: ${postId}?`);
-      if (result) {
-        await fetch('/api/blog/', {
-          method: 'DELETE',
-          body: JSON.stringify({ postId }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+      await fetch('/api/blog/', {
+        method: 'DELETE',
+        body: JSON.stringify({ postId }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        revalidatePathClient();
-      }
+      revalidatePathClient();
     } catch (err) {
       console.error(err);
     } finally {
@@ -44,8 +42,12 @@ export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="icon" className="size-8" variant="destructive">
-          <TrashIcon variant="outline" className="size-4" />
+        <Button disabled={pending} size="icon" className="size-8" variant="destructive">
+          {pending ? (
+            <SpinnerIcon className="size-5" />
+          ) : (
+            <TrashIcon variant="outline" className="size-4" />
+          )}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -58,7 +60,7 @@ export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Delete</AlertDialogAction>
+          <AlertDialogAction onClick={handleDeleteBlog}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
