@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '../shared/Markdown';
@@ -39,6 +39,9 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
       <form className="flex flex-col gap-3" action={action}>
         {/* hidden fields */}
         <input type="hidden" name="id" value={id?.toString() || ''} />
+        {/* This will send if submit form with preview tab open */}
+        {/* because then there will be no input with name attr */}
+        <input type="hidden" name="content" value={contentState} />
 
         <div className="grid w-full items-center gap-1.5">
           <Input

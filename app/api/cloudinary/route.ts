@@ -1,4 +1,3 @@
-// app/api/cloudinary-upload/route.ts
 import { NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
 
@@ -8,7 +7,7 @@ export async function POST(req: Request) {
     const file = formData.get('file') as File;
 
     if (!file) {
-      return NextResponse.json({ success: false, message: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ message: 'No file provided' }, { status: 400 });
     }
 
     const buffer = await file.arrayBuffer();
@@ -17,8 +16,8 @@ export async function POST(req: Request) {
 
     const uploadResponse = await cloudinary.uploader.upload(base64Image);
 
-    return NextResponse.json({ success: true, data: uploadResponse.url });
+    return NextResponse.json({ url: uploadResponse.url });
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }

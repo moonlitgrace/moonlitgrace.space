@@ -7,6 +7,7 @@ import slugify from 'slugify';
 
 export async function POST(request: NextRequest) {
   const data: AdminBlogData = await request.json();
+  console.log(data);
   const isToUpdate = data.id !== undefined;
 
   try {

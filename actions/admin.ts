@@ -1,8 +1,6 @@
 import { AdminBlogFormState, AdminBlogSchema } from '@/zod_schemas/admin';
 
 export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
-  console.log(state, formData.get('cover'));
-
   const validatedFields = AdminBlogSchema.safeParse({
     id: formData.get('id') ? Number(formData.get('id')) : undefined,
     title: formData.get('title'),
@@ -18,24 +16,27 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
   }
 
   try {
-    let coverImage = formData.get('cover');
-    if (coverImage) {
+    let coverImage = formData.get('cover') as File;
+    // coverImage returns invalid File object if nothing is selected
+    if (coverImage && coverImage.name && coverImage.size > 0) {
       const imageData = new FormData();
       imageData.append('file', coverImage);
 
-      const ImgRes = await fetch('/api/cloudinary', {
+      const imgRes = await fetch('/api/cloudinary', {
         method: 'POST',
         body: imageData,
       });
-      if (!ImgRes.ok) {
-        const imgErr = await ImgRes.json();
-        console.error('Image upload failed:', imgErr);
-        return { message: 'Image upload failed', error: imgErr };
+
+      if (!imgRes.ok) {
+        const imgResErr = await imgRes.json();
+        console.error('Image upload failed:', imgResErr);
+        return { message: imgResErr };
       }
 
-      const output = await ImgRes.json();
-      console.log(output);
+      const data = await imgRes.json();
+      validatedFields.data.cover = data.url;
     }
+
     const res = await fetch('/api/blog', {
       method: 'POST',
       body: JSON.stringify(validatedFields.data),
