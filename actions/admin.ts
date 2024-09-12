@@ -1,3 +1,4 @@
+import { validateFile } from '@/lib/utils';
 import { AdminBlogFormState, AdminBlogSchema } from '@/zod_schemas/admin';
 
 export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
@@ -18,7 +19,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
   try {
     let coverImage = formData.get('cover') as File;
     // coverImage returns invalid File object if nothing is selected
-    if (coverImage && coverImage.name && coverImage.size > 0) {
+    if (validateFile(coverImage)) {
       const imageData = new FormData();
       imageData.append('file', coverImage);
 
