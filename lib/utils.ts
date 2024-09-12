@@ -17,3 +17,7 @@ export function formatDate(dateStr: Date) {
 export function escapeText(text: string) {
   return text.toLowerCase().replace(/[^\w]+/g, '-');
 }
+
+export function validateFile(file: File) {
+  return file instanceof File && file.name !== '' && file.size > 0;
+}

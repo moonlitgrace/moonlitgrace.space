@@ -21,6 +21,7 @@ type Props = {
 export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -38,6 +39,9 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
       <form className="flex flex-col gap-3" action={action}>
         {/* hidden fields */}
         <input type="hidden" name="id" value={id?.toString() || ''} />
+        {/* This will send if submit form with preview tab open */}
+        {/* because then there will be no input with name attr */}
+        <input type="hidden" name="content" value={contentState} />
 
         <div className="grid w-full items-center gap-1.5">
           <Input
@@ -74,7 +78,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
             <TabsContent value="content">
               <Textarea
                 className="h-40"
-                placeholder="Type content here."
+                placeholder="Type content here..."
                 id="content"
                 name="content"
                 value={contentState}
@@ -93,7 +97,9 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
           </Tabs>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary">Draft</Button>
+          <Button type="button" variant="secondary">
+            Draft
+          </Button>
           <SubmitButton />
         </div>
       </form>
