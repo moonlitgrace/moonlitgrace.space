@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 
 // Styles
 import '@/styles/globals.css';
+import React from 'react';
 
 const fontSans = FontSans({
   subsets: ['latin'],
