@@ -1,4 +1,4 @@
-import { AuthForm } from '@/app/_components/_login/AuthForm';
+import { AuthForm } from '@/app/_components/_admin/_login/auth-form';
 
 export default async function LoginPage() {
   return (

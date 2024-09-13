@@ -1,6 +1,6 @@
 import { IconProps } from '@/interfaces/icon';
 
-export function PlusIcon(props: IconProps) {
+export default function PlusIcon(props: IconProps) {
   return (
     <svg
       {...props}

@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { revalidatePathClient } from '@/helpers/revalidate';
+import { revalidatePathClient } from '@/helpers/revalidate-path-client';
 import { useState } from 'react';
 import {
   AlertDialog,
