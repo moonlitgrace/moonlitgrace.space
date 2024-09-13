@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-const DynamicAdminBar = dynamic(() => import('@/components/admin/AdminBar'), {
+const DynamicAdminBar = dynamic(() => import('@/app/_components/_admin/admin-bar'), {
   ssr: false,
 });
 

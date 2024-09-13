@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import PencilIcon from '@/components/icons/pencil';
-import { useScreenDevice } from '@/hooks/useScreenDevice';
+import { useScreenDevice } from '@/hooks/use-screen-device';
 import HomeIcon from '@/components/icons/home';
 
 const AdminBar = () => {

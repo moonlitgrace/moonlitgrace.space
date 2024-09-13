@@ -7,8 +7,8 @@ import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import Markdown from '@/components/shared/Markdown';
-import TableOfContents from '@/components/main/TableOfContents';
+import Markdown from '@/components/markdown';
+import TableOfContents from '@/app/_components/_main/table-of-contents';
 
 export async function generateMetadata({
   params,
