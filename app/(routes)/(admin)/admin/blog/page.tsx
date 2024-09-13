@@ -9,11 +9,12 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import AdminBlogDeleteButton from '@/app/_components/_admin/BlogDeleteButton';
+import AdminBlogDeleteButton from '@/app/_components/_admin/admin-blog-delete-button';
+
 import { desc } from 'drizzle-orm';
 import { db } from '@/db';
 import PencilIcon from '@/components/icons/pencil';
-import { PlusIcon } from '@/components/icons/plus';
+import PlusIcon from '@/components/icons/plus';
 
 export default async function AdminBlogPage() {
   const postsData: Omit<PostSelect, 'content' | 'cover' | 'createdAt'>[] = await db
