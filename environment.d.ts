@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 namespace NodeJS {
   interface ProcessEnv {
     DATABASE_URL: string;
@@ -7,5 +8,6 @@ namespace NodeJS {
     CLOUDINARY_CLOUD_NAME: string;
     CLOUDINARY_API_KEY: string;
     CLOUDINARY_API_SECRET: string;
+    NEXT_PUBLIC_SENTRY_DSN: string;
   }
 }
