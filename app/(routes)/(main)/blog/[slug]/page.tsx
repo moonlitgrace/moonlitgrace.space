@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
-import { extractParagraphs, formatDate } from '@/lib/utils';
+import { extractParagraphs, formatDate, truncate } from '@/lib/utils';
 import { eq } from 'drizzle-orm';
 import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
@@ -20,7 +20,7 @@ export async function generateMetadata({
       .from(posts)
       .where(eq(posts.slug, params.slug))
   )[0];
-  const description = extractParagraphs(content).slice(0, 160);
+  const description = truncate(extractParagraphs(content), 160);
 
   return {
     title,

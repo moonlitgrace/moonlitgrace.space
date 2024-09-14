@@ -30,3 +30,7 @@ export function extractParagraphs(markdown: string) {
     .map((token) => (token as Tokens.Paragraph).text);
   return paragraphs.join(' ');
 }
+
+export function truncate(str: string, n: number) {
+  return (str.length > n) ? str.slice(0, n - 3) + '...' : str;
+}
