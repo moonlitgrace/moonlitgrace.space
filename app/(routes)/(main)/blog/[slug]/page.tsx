@@ -73,7 +73,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         )}
       </div>
       <Markdown markdown={postData.content} />
-      {headings.length && <TableOfContents headings={headings} />}
+      {headings.length > 0 && <TableOfContents headings={headings} />}
     </>
   );
 }
