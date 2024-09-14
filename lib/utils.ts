@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { marked, Tokens } from 'marked';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,4 +21,23 @@ export function escapeText(text: string) {
 
 export function validateFile(file: File) {
   return file instanceof File && file.name !== '' && file.size > 0;
+}
+
+export function stripHtmlTags(html: string) {
+  return html.replace(/<[^>]*>/g, '');
+}
+
+export function extractParagraphs(markdown: string) {
+  const tokens = marked.lexer(markdown);
+  const paragraphs = tokens
+    .filter((token) => token.type === 'paragraph')
+    .map((token) => {
+      const rawText = marked.parseInline((token as Tokens.Paragraph).text, { async: false });
+      return stripHtmlTags(rawText);
+    });
+  return paragraphs.join(' ');
+}
+
+export function truncate(str: string, n: number) {
+  return (str.length > n) ? str.slice(0, n - 3) + '...' : str;
 }
