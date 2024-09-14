@@ -14,5 +14,7 @@ namespace NodeJS {
     CLOUDINARY_API_SECRET: string;
     // SENTRY CREDS
     SENTRY_DSN: string;
+    // PUBLICs
+    NEXT_PUBLIC_APP_URL: string;
   }
 }

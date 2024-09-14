@@ -1,8 +1,7 @@
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
-import { formatDate } from '@/lib/utils';
+import { extractParagraphs, formatDate } from '@/lib/utils';
 import { eq } from 'drizzle-orm';
-import removeMarkdown from 'markdown-to-text';
 import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -15,17 +14,30 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { title, content } = (
+  const { title, content, cover, slug } = (
     await db
-      .select({ title: posts.title, content: posts.content })
+      .select({ title: posts.title, content: posts.content, cover: posts.cover, slug: posts.slug })
       .from(posts)
       .where(eq(posts.slug, params.slug))
   )[0];
-  const description = removeMarkdown(content).slice(0, 100) + '...';
+  const description = extractParagraphs(content).slice(0, 160);
 
   return {
     title,
     description,
+    openGraph: {
+      title,
+      description,
+      ...(cover && {
+        images: {
+          url: cover,
+        },
+      }),
+      url: process.env.NEXT_PUBLIC_APP_URL + '/blog/' + slug,
+      siteName: 'Moonlitgrace',
+      locale: 'en_US',
+      type: 'article',
+    }
   };
 }
 

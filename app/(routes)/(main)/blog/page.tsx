@@ -11,6 +11,15 @@ export const metadata: Metadata = {
   title: 'Blog | Moonlitgrace',
   description:
     'Dive into the Blog at Moonlitgrace, where a passionate web developer and open-source contributor shares thoughts, tutorials, and insights—all under the alias Moonlitgrace.',
+  openGraph: {
+    title: 'Blog | Moonlitgrace',
+    description:
+      'Dive into the Blog at Moonlitgrace, where a passionate web developer and open-source contributor shares thoughts, tutorials, and insights—all under the alias Moonlitgrace.',
+    url: process.env.NEXT_PUBLIC_APP_URL,
+    siteName: 'Moonlitgrace',
+    locale: 'en_US',
+    type: 'website',
+  }
 };
 
 export default async function BlogPage() {
