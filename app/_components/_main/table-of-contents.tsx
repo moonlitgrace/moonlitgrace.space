@@ -28,7 +28,7 @@ const TableOfContents = ({ headings }: { headings: string[] }) => {
         <PopoverContent
           sideOffset={20}
           side="left"
-          className="w-max flex-col gap-4 rounded-2xl border bg-background p-5 md:flex"
+          className="w-max hidden flex-col gap-4 rounded-2xl border bg-background p-5 md:flex"
         >
           <h3 className="font-bold">Table of Contents</h3>
           <div className="flex flex-col gap-1">
