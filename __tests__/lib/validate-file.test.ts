@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { validateFile } from "@/lib/utils";
 
 describe('check File validation', () => {

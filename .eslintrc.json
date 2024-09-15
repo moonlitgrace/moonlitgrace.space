@@ -1,3 +1,11 @@
 {
-  "extends": ["eslint:recommended", "next", "prettier"]
+  "extends": ["eslint:recommended", "next", "prettier"],
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }
