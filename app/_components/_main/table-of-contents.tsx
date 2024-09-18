@@ -1,11 +1,10 @@
 'use client';
 
+import { cn, escapeText } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import Chevrons from '@/components/icons/chevrons';
-import { cn } from '@/utils/cn';
-import { escapeText } from '@/utils/html';
 
 const TableOfContents = ({ headings }: { headings: string[] }) => {
   const [tocOpen, setTocOpen] = useState(true);

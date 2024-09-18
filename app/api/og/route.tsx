@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import { arrayBufferToBase64 } from '@/utils/array';
+import { arrayBufferToBase64 } from '@/lib/utils';
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';

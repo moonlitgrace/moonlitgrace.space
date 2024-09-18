@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 describe('check classnames (twMerge)', () => {
   it('normal checks', () => {
