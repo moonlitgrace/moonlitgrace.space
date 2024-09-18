@@ -10,6 +10,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '@/components/markdown';
 import { Checkbox } from '@/components/ui/checkbox';
+import { revalidatePathClient } from '@/helpers/revalidate-path-client';
 
 type Props = {
   id?: number;
@@ -28,6 +29,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
 
   useEffect(() => {
     if (state?.message === 'success') {
+      revalidatePathClient()
       router.push('/admin/blog');
     }
   }, [state, router]);
@@ -100,7 +102,7 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
         </div>
         <div className="flex gap-5">
           <div className="flex items-center gap-2">
-            <Checkbox name='draft' id="draft" defaultValue={draft ? 'on' : 'off'} />
+            <Checkbox name='draft' id="draft" defaultChecked={draft} />
             <label
               htmlFor="draft"
               className="text-sm whitespace-nowrap font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

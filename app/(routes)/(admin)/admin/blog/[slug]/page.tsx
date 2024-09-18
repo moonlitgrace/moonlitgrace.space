@@ -9,12 +9,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
   )[0];
 
   return (
-    <AdminBlogForm
-      id={postData.id}
-      title={postData.title}
-      tag={postData.tag}
-      content={postData.content}
-      cover={postData.cover}
-    />
+    <AdminBlogForm {...postData} />
   );
 }
