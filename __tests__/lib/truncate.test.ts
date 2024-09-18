@@ -1,13 +1,13 @@
-import { truncate } from "@/lib/utils"
+import { truncate } from '@/lib/utils';
 
 describe('truncate char', () => {
-  const exampleStr = 'Step into Moonlitgrace'
+  const exampleStr = 'Step into Moonlitgrace';
 
   it('shouldn"t truncate char shorter than n', () => {
-    expect(truncate(exampleStr, 25)).toBe(exampleStr)
-  })
+    expect(truncate(exampleStr, 25)).toBe(exampleStr);
+  });
 
   it('shouldn truncate char larger than n', () => {
-    expect(truncate(exampleStr, 20)).toBe('Step into Moonlit...')
-  })
-})
+    expect(truncate(exampleStr, 20)).toBe('Step into Moonlit...');
+  });
+});

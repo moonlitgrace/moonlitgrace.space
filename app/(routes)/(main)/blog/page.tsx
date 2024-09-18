@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'Moonlitgrace',
     locale: 'en_US',
     type: 'website',
-  }
+  },
 };
 
 export default async function BlogPage() {

@@ -15,21 +15,17 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const { title, content, cover, slug, tag, createdAt } = (
-    await db
-      .select()
-      .from(posts)
-      .where(eq(posts.slug, params.slug))
+    await db.select().from(posts).where(eq(posts.slug, params.slug))
   )[0];
   const description = truncate(extractParagraphs(content), 160);
 
   // og: dynamic image
-  const ogImgUrl = new URL(process.env.NEXT_PUBLIC_APP_URL + '/api/og')
-  ogImgUrl.searchParams.set('title', title)
-  ogImgUrl.searchParams.set('description', description)
-  ogImgUrl.searchParams.set('tag', tag)
-  ogImgUrl.searchParams.set('createdAt', formatDate(createdAt))
-  if (cover)
-    ogImgUrl.searchParams.set('cover', cover)
+  const ogImgUrl = new URL(process.env.NEXT_PUBLIC_APP_URL + '/api/og');
+  ogImgUrl.searchParams.set('title', title);
+  ogImgUrl.searchParams.set('description', description);
+  ogImgUrl.searchParams.set('tag', tag);
+  ogImgUrl.searchParams.set('createdAt', formatDate(createdAt));
+  if (cover) ogImgUrl.searchParams.set('cover', cover);
 
   return {
     title,
@@ -47,7 +43,7 @@ export async function generateMetadata({
       siteName: 'Moonlitgrace',
       locale: 'en_US',
       type: 'article',
-    }
+    },
   };
 }
 
