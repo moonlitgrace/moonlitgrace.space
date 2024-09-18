@@ -2,24 +2,31 @@ import { validateFile } from '@/lib/utils';
 import { AdminBlogFormState, AdminBlogSchema } from '@/zod_schemas/admin';
 
 export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {
-  const validatedFields = AdminBlogSchema.safeParse({
-    id: formData.get('id') ? Number(formData.get('id')) : undefined,
-    title: formData.get('title'),
-    tag: formData.get('tag'),
-    content: formData.get('content'),
-  });
+  const isDraft = formData.get('is_draft') === 'true';
 
-  if (!validatedFields.success) {
-    console.log(validatedFields.error);
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    };
+  const rawData = {
+    id: formData.get('id') ? Number(formData.get('id')) : undefined,
+    title: formData.get('title') as string,
+    tag: formData.get('tag') as string,
+    content: formData.get('content') as string,
+    is_draft: isDraft,
+  };
+
+  let dataToSend: any = rawData;
+  if (!isDraft) {
+    const validatedFields = AdminBlogSchema.safeParse(rawData);
+    if (!validatedFields.success) {
+      console.log(validatedFields.error);
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+    dataToSend = { ...validatedFields.data, is_draft: isDraft };
   }
 
   try {
-    let coverImage = formData.get('cover') as File;
-    // coverImage returns invalid File object if nothing is selected
-    if (validateFile(coverImage)) {
+    const coverImage = formData.get('cover') as File;
+    if (coverImage && validateFile(coverImage)) {
       const imageData = new FormData();
       imageData.append('file', coverImage);
 
@@ -35,12 +42,12 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
       }
 
       const data = await imgRes.json();
-      validatedFields.data.cover = data.url;
+      dataToSend.cover = data.url;
     }
 
     const res = await fetch('/api/blog', {
       method: 'POST',
-      body: JSON.stringify(validatedFields.data),
+      body: JSON.stringify(dataToSend),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -53,7 +60,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
 
     return { message: 'success' };
   } catch (err) {
-    console.error(err);
+    console.error('API call failed:', err);
     return { message: 'API call failed' };
   }
 }
