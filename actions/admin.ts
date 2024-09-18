@@ -1,4 +1,4 @@
-import { validateFile } from '@/utils/file';
+import { validateFile } from '@/lib/utils';
 import { AdminBlogFormState, AdminBlogSchema } from '@/zod_schemas/admin';
 
 export default async function adminBlogSubmit(state: AdminBlogFormState, formData: FormData) {

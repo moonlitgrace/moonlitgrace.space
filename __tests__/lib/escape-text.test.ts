@@ -1,16 +1,4 @@
-import { escapeText, stripHtmlTags } from '@/utils/html';
-
-describe('stripe html tags', () => {
-  it('should return plaintext itself', () => {
-    expect(stripHtmlTags('plain-text')).toBe('plain-text');
-  });
-
-  it('should return content inside', () => {
-    expect(stripHtmlTags('<strong>Moonlitgrace</strong>')).toBe('Moonlitgrace');
-    expect(stripHtmlTags('<h1><italic>Hello World</italic></h1>')).toBe('Hello World');
-  });
-});
-
+import { escapeText } from '@/lib/utils';
 
 describe('escape text', () => {
   it('should return lower case of plainText', () => {
