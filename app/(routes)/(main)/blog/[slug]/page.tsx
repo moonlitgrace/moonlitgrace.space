@@ -1,6 +1,5 @@
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
-import { extractParagraphs, formatDate, truncate } from '@/lib/utils';
 import { eq } from 'drizzle-orm';
 import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
@@ -8,6 +7,9 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import Markdown from '@/components/markdown';
 import TableOfContents from '@/app/_components/_main/table-of-contents';
+import { truncate } from '@/utils/string';
+import { extractParagraphs } from '@/utils/marked';
+import { formatDate } from '@/utils/date';
 
 export async function generateMetadata({
   params,

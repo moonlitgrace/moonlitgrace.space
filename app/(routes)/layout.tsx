@@ -1,9 +1,9 @@
 import { DM_Sans as FontSans } from 'next/font/google';
-import { cn } from '@/lib/utils';
 
 // Styles
 import '@/styles/globals.css';
 import React from 'react';
+import { cn } from '@/utils/cn';
 
 const fontSans = FontSans({
   subsets: ['latin'],
