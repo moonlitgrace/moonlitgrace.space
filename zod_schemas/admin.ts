@@ -7,6 +7,7 @@ export const AdminBlogSchema = z.object({
   tag: zodNonEmptyString('tag'),
   content: zodNonEmptyString('content'),
   cover: z.string().nullable().optional(),
+  draft: z.boolean(),
 });
 
 export type AdminBlogData = z.infer<typeof AdminBlogSchema>;

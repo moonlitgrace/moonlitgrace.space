@@ -30,6 +30,7 @@ export default async function BlogPage() {
       slug: posts.slug,
       tag: posts.tag,
       createdAt: posts.createdAt,
+      draft: posts.draft,
     })
     .from(posts)
     .orderBy(desc(posts.createdAt));
@@ -41,20 +42,22 @@ export default async function BlogPage() {
         <span className="text-primary">.</span>
       </h2>
       <div className="flex flex-col gap-5">
-        {postsData.map((item) => (
-          <div key={item.id} className="flex flex-col">
-            <span className="text-xs font-bold uppercase text-muted-foreground">
-              {formatDate(item.createdAt)}
-            </span>
-            <div className="flex items-center gap-4">
-              <Link href={`/blog/${item.slug}`} className="relative text-lg underline">
-                {item.title}
-              </Link>
-              <Separator className="hidden flex-1 md:flex" />
-              <Badge className="hidden w-min capitalize md:flex">{item.tag}</Badge>
+        {postsData
+          .filter((post) => !post.draft)
+          .map((post) => (
+            <div key={post.id} className="flex flex-col">
+              <span className="text-xs font-bold uppercase text-muted-foreground">
+                {formatDate(post.createdAt)}
+              </span>
+              <div className="flex items-center gap-4">
+                <Link href={`/blog/${post.slug}`} className="relative text-lg underline">
+                  {post.title}
+                </Link>
+                <Separator className="hidden flex-1 md:flex" />
+                <Badge className="hidden w-min capitalize md:flex">{post.tag}</Badge>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );

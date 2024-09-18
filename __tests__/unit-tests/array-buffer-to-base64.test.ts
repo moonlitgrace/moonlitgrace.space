@@ -1,4 +1,4 @@
-import { arrayBufferToBase64 } from "@/lib/utils";
+import { arrayBufferToBase64 } from '@/lib/utils';
 
 describe('array buffer to base64', () => {
   it('should convert ArrayBuffer to base64 string', () => {
@@ -7,4 +7,3 @@ describe('array buffer to base64', () => {
     expect(arrayBufferToBase64(buffer)).toBe('SGVsbG8=');
   });
 });
-

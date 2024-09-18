@@ -8,13 +8,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
     await db.select().from(posts).where(eq(posts.slug, params.slug))
   )[0];
 
-  return (
-    <AdminBlogForm
-      id={postData.id}
-      title={postData.title}
-      tag={postData.tag}
-      content={postData.content}
-      cover={postData.cover}
-    />
-  );
+  return <AdminBlogForm {...postData} />;
 }

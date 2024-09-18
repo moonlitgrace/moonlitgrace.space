@@ -23,6 +23,7 @@ export default async function AdminBlogPage() {
       title: posts.title,
       slug: posts.slug,
       tag: posts.tag,
+      draft: posts.draft,
     })
     .from(posts)
     .orderBy(desc(posts.createdAt));
@@ -60,6 +61,7 @@ export default async function AdminBlogPage() {
                 </Link>
               </TableCell>
               <TableCell className="capitalize">{post.tag}</TableCell>
+              <TableCell className="text-muted-foreground">{post.draft && '(draft)'}</TableCell>
               <TableCell className="flex justify-end gap-2">
                 <Link href={`/admin/blog/${post.slug}`}>
                   <Button size="icon" className="size-8" variant="ghost">

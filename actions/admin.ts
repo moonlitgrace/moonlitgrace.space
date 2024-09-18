@@ -7,6 +7,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
     title: formData.get('title'),
     tag: formData.get('tag'),
     content: formData.get('content'),
+    draft: formData.get('draft') === 'on',
   });
 
   if (!validatedFields.success) {
