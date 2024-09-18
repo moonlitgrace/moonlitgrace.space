@@ -1,4 +1,4 @@
-import { truncate } from '@/lib/utils';
+import { truncate } from '@/utils/string';
 
 describe('truncate char', () => {
   const exampleStr = 'Step into Moonlitgrace';

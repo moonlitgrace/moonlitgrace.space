@@ -1,4 +1,4 @@
-import { validateFile } from '@/lib/utils';
+import { validateFile } from '@/utils/file';
 
 describe('check File validation', () => {
   it('should return true if File is valid', () => {
