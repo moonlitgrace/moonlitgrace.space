@@ -12,7 +12,7 @@ import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
 import { Separator } from '@/components/ui/separator';
 import { useScreenDevice } from '@/hooks/use-screen-device';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 
 const AppBar = () => {
   const pathname = usePathname();

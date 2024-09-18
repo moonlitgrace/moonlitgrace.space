@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { validateFile } from '@/lib/utils';
 import cloudinary from '@/app/_lib/cloudinary';
+import { validateFile } from '@/utils/file';
 
 export async function POST(req: Request) {
   try {

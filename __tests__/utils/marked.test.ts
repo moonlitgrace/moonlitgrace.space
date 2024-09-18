@@ -1,4 +1,4 @@
-import { extractParagraphs } from '@/lib/utils';
+import { extractParagraphs } from "@/utils/marked";
 
 describe('extract paragraphs only from markdown', () => {
   it('should return paragraph', () => {

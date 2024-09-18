@@ -1,4 +1,4 @@
-import { formatDate } from '@/lib/utils';
+import { formatDate } from '@/utils/date';
 
 test('check formated date', () => {
   const date = new Date('2023-03-11T02:37:40.790Z');

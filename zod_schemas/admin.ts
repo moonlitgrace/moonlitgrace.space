@@ -1,4 +1,4 @@
-import { zodNonEmptyString } from '@/lib/zod';
+import { zodNonEmptyString } from '@/helpers/zod';
 import { z } from 'zod';
 
 export const AdminBlogSchema = z.object({
@@ -13,11 +13,11 @@ export type AdminBlogData = z.infer<typeof AdminBlogSchema>;
 
 export type AdminBlogFormState =
   | {
-      errors?: {
-        title?: string[];
-        tag?: string[];
-        content?: string[];
-      };
-      message?: string;
-    }
+    errors?: {
+      title?: string[];
+      tag?: string[];
+      content?: string[];
+    };
+    message?: string;
+  }
   | undefined;
