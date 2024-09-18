@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
           content: data.content,
           slug: slugify(data.title.toLowerCase()),
           ...(data.cover && { cover: data.cover }),
+          draft: data.draft,
         })
         .where(eq(posts.id, data.id as number));
 
@@ -30,6 +31,7 @@ export async function POST(request: NextRequest) {
         content: data.content,
         slug: slugify(data.title.toLowerCase()),
         ...(data.cover && { cover: data.cover }),
+        draft: data.draft,
       });
 
       return NextResponse.json({ message: 'Success' });

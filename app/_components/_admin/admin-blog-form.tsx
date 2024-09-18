@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '@/components/markdown';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type Props = {
   id?: number;
@@ -16,9 +17,10 @@ type Props = {
   tag?: string;
   content?: string;
   cover?: string | null;
+  draft?: boolean;
 };
 
-export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover }: Props) {
+export default function AdminBlogForm({ id, title = '', tag = '', content = '', cover, draft = false }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
 
@@ -96,10 +98,16 @@ export default function AdminBlogForm({ id, title = '', tag = '', content = '', 
             </TabsContent>
           </Tabs>
         </div>
-        <div className="flex gap-3">
-          <Button type="button" variant="secondary">
-            Draft
-          </Button>
+        <div className="flex gap-5">
+          <div className="flex items-center gap-2">
+            <Checkbox name='draft' id="draft" defaultValue={draft ? 'on' : 'off'} />
+            <label
+              htmlFor="draft"
+              className="text-sm whitespace-nowrap font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Save as Draft
+            </label>
+          </div>
           <SubmitButton />
         </div>
       </form>
