@@ -1,5 +1,5 @@
-import { stripHtmlTags } from "@/lib/utils";
 import { marked, Tokens } from "marked";
+import { stripHtmlTags } from "./html";
 
 export function extractParagraphs(markdown: string) {
   const tokens = marked.lexer(markdown);
