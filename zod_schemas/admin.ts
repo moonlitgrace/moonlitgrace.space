@@ -14,11 +14,11 @@ export type AdminBlogData = z.infer<typeof AdminBlogSchema>;
 
 export type AdminBlogFormState =
   | {
-    errors?: {
-      title?: string[];
-      tag?: string[];
-      content?: string[];
-    };
-    message?: string;
-  }
+      errors?: {
+        title?: string[];
+        tag?: string[];
+        content?: string[];
+      };
+      message?: string;
+    }
   | undefined;

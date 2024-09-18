@@ -8,7 +8,7 @@ export const posts = pgTable('posts', {
   cover: text('cover'),
   content: text('content').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
-  draft: boolean("draft").notNull().default(false),
+  draft: boolean('draft').notNull().default(false),
 });
 
 export type PostSelect = typeof posts.$inferSelect;
