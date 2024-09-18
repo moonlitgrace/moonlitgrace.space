@@ -1,4 +1,4 @@
-import { extractParagraphs } from "@/lib/utils"
+import { extractParagraphs } from '@/lib/utils';
 
 describe('extract paragraphs only from markdown', () => {
   it('should return paragraph', () => {
@@ -7,7 +7,7 @@ describe('extract paragraphs only from markdown', () => {
 
 > WHOAMI
 
-Moonlitgrace is a good bwoy!.`
-    expect(extractParagraphs(mockMarkdown)).toBe('Moonlitgrace is a good bwoy!.')
-  })
-})
+Moonlitgrace is a good bwoy!.`;
+    expect(extractParagraphs(mockMarkdown)).toBe('Moonlitgrace is a good bwoy!.');
+  });
+});

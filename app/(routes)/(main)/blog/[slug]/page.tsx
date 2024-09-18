@@ -14,13 +14,18 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { title, content, cover, slug } = (
-    await db
-      .select({ title: posts.title, content: posts.content, cover: posts.cover, slug: posts.slug })
-      .from(posts)
-      .where(eq(posts.slug, params.slug))
+  const { title, content, cover, slug, tag, createdAt } = (
+    await db.select().from(posts).where(eq(posts.slug, params.slug))
   )[0];
   const description = truncate(extractParagraphs(content), 160);
+
+  // og: dynamic image
+  const ogImgUrl = new URL(process.env.NEXT_PUBLIC_APP_URL + '/api/og');
+  ogImgUrl.searchParams.set('title', title);
+  ogImgUrl.searchParams.set('description', description);
+  ogImgUrl.searchParams.set('tag', tag);
+  ogImgUrl.searchParams.set('createdAt', formatDate(createdAt));
+  if (cover) ogImgUrl.searchParams.set('cover', cover);
 
   return {
     title,
@@ -28,16 +33,17 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      ...(cover && {
-        images: {
-          url: cover,
-        },
-      }),
+      images: {
+        url: ogImgUrl.toString(),
+        width: 1200,
+        height: 630,
+        alt: title,
+      },
       url: process.env.NEXT_PUBLIC_APP_URL + '/blog/' + slug,
       siteName: 'Moonlitgrace',
       locale: 'en_US',
       type: 'article',
-    }
+    },
   };
 }
 

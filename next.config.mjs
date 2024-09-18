@@ -12,11 +12,11 @@ const nextConfig = {
       rules: {
         '*.svg': {
           loaders: ['@svgr/webpack'],
-          as: '*.js'
-        }
-      }
-    }
-  }
+          as: '*.js',
+        },
+      },
+    },
+  },
 };
 
 export default withSentryConfig(nextConfig, {
