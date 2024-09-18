@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run database migrations
-npm run db:migrate
+npx drizzle-kit migrate
 
 # If migration succeeds, proceed to build
 if [ $? -eq 0 ]; then
