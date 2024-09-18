@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "db:migrate && next build",
+    "build": "next build",
     "start": "next start",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
