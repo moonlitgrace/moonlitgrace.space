@@ -23,9 +23,11 @@ export default async function AdminBlogPage() {
       title: posts.title,
       slug: posts.slug,
       tag: posts.tag,
+      is_draft: posts.is_draft
     })
     .from(posts)
     .orderBy(desc(posts.createdAt));
+  console.log('Posts Data:', postsData);
 
   return (
     <>
@@ -47,6 +49,8 @@ export default async function AdminBlogPage() {
             <TableHead>Id</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Tag</TableHead>
+     
+            <TableHead></TableHead>
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
@@ -60,6 +64,9 @@ export default async function AdminBlogPage() {
                 </Link>
               </TableCell>
               <TableCell className="capitalize">{post.tag}</TableCell>
+              {/* <TableCell className="capitalize">{post.is_draft ? <Tick className="size-5" /> : <PlusIcon className='size-5 rotate-45 text-destructive' />}</TableCell> */}
+              <TableCell className="capitalize text-muted-foreground">{post.is_draft ? "Draft" : ""}</TableCell>
+
               <TableCell className="flex justify-end gap-2">
                 <Link href={`/admin/blog/${post.slug}`}>
                   <Button size="icon" className="size-8" variant="ghost">
@@ -69,6 +76,7 @@ export default async function AdminBlogPage() {
                 <AdminBlogDeleteButton postId={post.id} />
               </TableCell>
             </TableRow>
+
           ))}
         </TableBody>
       </Table>

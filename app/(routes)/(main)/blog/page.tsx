@@ -29,6 +29,7 @@ export default async function BlogPage() {
       title: posts.title,
       slug: posts.slug,
       tag: posts.tag,
+      is_draft: posts.is_draft,
       createdAt: posts.createdAt,
     })
     .from(posts)
@@ -41,8 +42,8 @@ export default async function BlogPage() {
         <span className="text-primary">.</span>
       </h2>
       <div className="flex flex-col gap-5">
-        {postsData.map((item) => (
-          <div key={item.id} className="flex flex-col">
+        {postsData.map((item) =>
+          <div key={item.id} className={item.is_draft ? "hidden" : "flex flex-col"}>
             <span className="text-xs font-bold uppercase text-muted-foreground">
               {formatDate(item.createdAt)}
             </span>
@@ -54,7 +55,7 @@ export default async function BlogPage() {
               <Badge className="hidden w-min capitalize md:flex">{item.tag}</Badge>
             </div>
           </div>
-        ))}
+        )}
       </div>
     </>
   );

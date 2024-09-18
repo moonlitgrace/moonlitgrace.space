@@ -1,6 +1,6 @@
 {
-  "id": "a0e38a8e-5c92-4669-9f13-789788513011",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "d616e55a-f137-4edb-8e53-8a26b335f729",
+  "prevId": "a0e38a8e-5c92-4669-9f13-789788513011",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -37,6 +37,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "is_draft": {
+          "name": "is_draft",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
         },
         "content": {
           "name": "content",

@@ -1,0 +1,1 @@
+ALTER TABLE "posts" ALTER COLUMN "is_draft" SET DEFAULT false;

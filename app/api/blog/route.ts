@@ -8,25 +8,30 @@ import slugify from 'slugify';
 export async function POST(request: NextRequest) {
   const data: AdminBlogData = await request.json();
   const isToUpdate = data.id !== undefined;
-
+  console.log(data);
   try {
     if (isToUpdate) {
+      // Handle update case
       await db
         .update(posts)
         .set({
           title: data.title,
           tag: data.tag,
           content: data.content,
+          is_draft: data.is_draft,
           slug: slugify(data.title.toLowerCase()),
           ...(data.cover && { cover: data.cover }),
+          // Ensure is_draft is set if needed
         })
         .where(eq(posts.id, data.id as number));
 
       return NextResponse.json({ message: 'Success' });
     } else {
+      // Handle insert case
       await db.insert(posts).values({
         title: data.title,
         tag: data.tag,
+        is_draft: data.is_draft,
         content: data.content,
         slug: slugify(data.title.toLowerCase()),
         ...(data.cover && { cover: data.cover }),

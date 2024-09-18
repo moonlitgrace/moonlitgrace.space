@@ -14,7 +14,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { title, content, cover, slug } = (
+  const { title, content, cover, slug} = (
     await db
       .select({ title: posts.title, content: posts.content, cover: posts.cover, slug: posts.slug })
       .from(posts)
