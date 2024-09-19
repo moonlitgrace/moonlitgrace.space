@@ -81,6 +81,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
           USE_PROFILES: { html: true },
+          ADD_ATTR: ['onclick'],
         }),
       }}
     ></article>
