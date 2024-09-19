@@ -12,23 +12,16 @@ import Markdown from '@/components/markdown';
 import { Checkbox } from '@/components/ui/checkbox';
 import { revalidatePathClient } from '@/helpers/revalidate-path-client';
 
-type Props = {
-  id?: number;
-  title?: string;
-  tag?: string;
-  content?: string;
-  cover?: string | null;
-  draft?: boolean;
-};
+type Props = Partial<{
+  id: number;
+  title: string;
+  tag: string;
+  content: string;
+  cover: string | null;
+  draft: boolean;
+}>;
 
-export default function AdminBlogForm({
-  id,
-  title = '',
-  tag = '',
-  content = '',
-  cover,
-  draft = false,
-}: Props) {
+export default function AdminBlogForm({ id, title, tag, content, cover, draft = false }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
 
