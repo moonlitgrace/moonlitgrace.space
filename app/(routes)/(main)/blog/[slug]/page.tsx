@@ -67,15 +67,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <h1 className="text-center text-4xl font-black leading-snug">{postData.title}</h1>
         <Badge className="capitalize">{postData.tag}</Badge>
         {postData.cover && (
-          <div className="relative h-40 w-full">
-            <Image
-              src={postData.cover}
-              alt={postData.title}
-              priority={true}
-              fill
-              className="rounded-2xl object-cover"
-            />
-          </div>
+          <Image
+            src={postData.cover}
+            alt={postData.title}
+            priority={true}
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: '100%', height: 'auto' }}
+            className="rounded-2xl"
+          />
         )}
       </div>
       <Markdown markdown={postData.content} />

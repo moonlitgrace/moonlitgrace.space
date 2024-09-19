@@ -28,12 +28,12 @@ const TableOfContents = ({ headings }: { headings: string[] }) => {
         <PopoverContent
           sideOffset={20}
           side="left"
-          className="hidden w-max flex-col gap-4 rounded-2xl border bg-background p-5 md:flex"
+          className="hidden w-60 flex-col gap-4 rounded-2xl border bg-background p-5 md:flex"
         >
           <h3 className="font-bold">Table of Contents</h3>
           <div className="flex flex-col gap-1">
             {headings.map((heading, idx) => (
-              <a key={idx} className="w-max font-medium underline" href={`#${escapeText(heading)}`}>
+              <a key={idx} className="font-medium underline" href={`#${escapeText(heading)}`}>
                 <span className="text-primary">#.&nbsp;</span>
                 {heading}
               </a>
