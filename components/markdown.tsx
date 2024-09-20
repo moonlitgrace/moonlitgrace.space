@@ -5,6 +5,7 @@ import DOMPurify from 'isomorphic-dompurify';
 import hljs from 'highlight.js/lib/core';
 import '@/styles/hljs/github-dark.css';
 import { escapeText } from '@/lib/utils';
+import MarkdownCopyListener from '@/app/_components/_main/markdown-copy-listener';
 
 const languages = {
   plaintext: () => import('highlight.js/lib/languages/plaintext'),
@@ -75,7 +76,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
     },
   );
 
-  return (
+  return <>
     <article
       className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
       dangerouslySetInnerHTML={{
@@ -84,7 +85,8 @@ const Markdown = ({ markdown }: { markdown: string }) => {
         }),
       }}
     ></article>
-  );
+    <MarkdownCopyListener />
+  </>
 };
 
 export default Markdown;
