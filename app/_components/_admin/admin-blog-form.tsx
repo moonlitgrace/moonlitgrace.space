@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '@/components/markdown';
@@ -24,9 +24,14 @@ type Props = Partial<{
 export default function AdminBlogForm({ id, title, tag, content, cover, draft = false }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
-
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
+  const clearImage = () => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
 
+  }
   useEffect(() => {
     if (state?.message === 'success') {
       revalidatePathClient();
@@ -58,10 +63,14 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
           <p className="text-sm text-muted-foreground">{title}</p>
         </div>
         <div className="flex items-start gap-4">
-          <div className="grid w-full items-center gap-1.5">
-            <Input id="cover" type="file" name="cover" />
+          <div className="grid w-full items-center gap-1.5 relative">
+            <Input ref={inputRef} id="cover" type="file" name="cover" />
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
+            <div className="absolute top-0 right-0 w-max items-center gap-1.5">
+              <Button variant="ghost" onClick={() => clearImage()} ><PlusIcon className='text-foreground size-5 rotate-45'  /></Button>
+            </div>
           </div>
+
           <div className="grid w-max items-center gap-1.5">
             <Input
               type="text"
