@@ -5,6 +5,7 @@ import DOMPurify from 'isomorphic-dompurify';
 import hljs from 'highlight.js/lib/core';
 import '@/styles/hljs/github-dark.css';
 import { escapeText } from '@/lib/utils';
+import MarkdownCopyListener from '@/app/_components/_main/markdown-copy-listener';
 
 const languages = {
   plaintext: () => import('highlight.js/lib/languages/plaintext'),
@@ -43,7 +44,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       </h${depth}>`;
     },
     code({ text, lang }) {
-      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.textContent).then(() => { this.innerText = 'Copied'; setTimeout(() => { this.innerText = 'Copy' }, 2000); })">Copy</button></div><div class='flex-1 overflow-x-scroll'><code>${text}</code></div></pre>`;
+      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button class='copy-code-btn'>Copy</button></div><div class='flex-1 overflow-x-scroll'><code>${text}</code></div></pre>`;
     },
     link(args) {
       const link = marked.Renderer.prototype.link.call(this, args);
@@ -76,15 +77,17 @@ const Markdown = ({ markdown }: { markdown: string }) => {
   );
 
   return (
-    <article
-      className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
-      dangerouslySetInnerHTML={{
-        __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
-          USE_PROFILES: { html: true },
-          ADD_ATTR: ['onclick'],
-        }),
-      }}
-    ></article>
+    <>
+      <article
+        className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
+            USE_PROFILES: { html: true },
+          }),
+        }}
+      ></article>
+      <MarkdownCopyListener />
+    </>
   );
 };
 
