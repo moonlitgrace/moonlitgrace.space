@@ -76,17 +76,19 @@ const Markdown = ({ markdown }: { markdown: string }) => {
     },
   );
 
-  return <>
-    <article
-      className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
-      dangerouslySetInnerHTML={{
-        __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
-          USE_PROFILES: { html: true },
-        }),
-      }}
-    ></article>
-    <MarkdownCopyListener />
-  </>
+  return (
+    <>
+      <article
+        className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
+            USE_PROFILES: { html: true },
+          }),
+        }}
+      ></article>
+      <MarkdownCopyListener />
+    </>
+  );
 };
 
 export default Markdown;
