@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '@/components/markdown';
 import { Checkbox } from '@/components/ui/checkbox';
 import { revalidatePathClient } from '@/helpers/revalidate-path-client';
+import PlusIcon from '@/components/icons/plus';
 
 type Props = Partial<{
   id: number;
