@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import Markdown from '@/components/markdown';
 import TableOfContents from '@/app/_components/_main/table-of-contents';
+import MarkdownCopyListener from '@/app/_components/_main/markdown-copy-listener';
 
 export async function generateMetadata({
   params,
@@ -80,6 +81,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         )}
       </div>
       <Markdown markdown={postData.content} />
+      <MarkdownCopyListener />
       {headings.length > 0 && <TableOfContents headings={headings} />}
     </>
   );
