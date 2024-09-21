@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, ChangeEvent } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '@/components/markdown';
 import { Checkbox } from '@/components/ui/checkbox';
 import { revalidatePathClient } from '@/helpers/revalidate-path-client';
+import PlusIcon from '@/components/icons/plus';
 
 type Props = Partial<{
   id: number;
@@ -24,8 +25,21 @@ type Props = Partial<{
 export default function AdminBlogForm({ id, title, tag, content, cover, draft = false }: Props) {
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
+  const [showCoverClearBtn, setShowCoverClearBtn] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const router = useRouter();
+
+  function handleClearImage() {
+    if (!inputRef.current) return;
+    inputRef.current.value = '';
+    setShowCoverClearBtn(false);
+  }
+
+  function handleCoverFileChange(event: ChangeEvent<HTMLInputElement>) {
+    setShowCoverClearBtn((event.target.files?.length as number) > 0);
+  }
 
   useEffect(() => {
     if (state?.message === 'success') {
@@ -59,9 +73,28 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
         </div>
         <div className="flex items-start gap-4">
           <div className="grid w-full items-center gap-1.5">
-            <Input id="cover" type="file" name="cover" />
+            <div className="relative flex items-center">
+              <Input
+                ref={inputRef}
+                id="cover"
+                type="file"
+                name="cover"
+                onChange={handleCoverFileChange}
+              />
+              <Button
+                type="button"
+                className="absolute right-1.5 size-7"
+                variant="secondary"
+                size="icon"
+                onClick={handleClearImage}
+                disabled={!showCoverClearBtn}
+              >
+                <PlusIcon className="size-5 rotate-45 text-foreground" />
+              </Button>
+            </div>
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
           </div>
+
           <div className="grid w-max items-center gap-1.5">
             <Input
               type="text"
