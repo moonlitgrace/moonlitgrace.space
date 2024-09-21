@@ -26,12 +26,14 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
   const router = useRouter();
-  const handleClearImage = () => {
+
+  function handleClearImage() {
     if (inputRef.current) {
       inputRef.current.value = '';
     }
-  };
+  }
   useEffect(() => {
     if (state?.message === 'success') {
       revalidatePathClient();
