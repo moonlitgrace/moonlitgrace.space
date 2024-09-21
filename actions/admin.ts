@@ -35,7 +35,7 @@ export default async function adminBlogSubmit(state: AdminBlogFormState, formDat
         return { message: imgResErr };
       }
 
-      const data = await imgRes.json(); 
+      const data = await imgRes.json();
       validatedFields.data.cover = data.url;
     }
 

@@ -27,12 +27,11 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
   const [contentState, setContentState] = useState(content);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
-  const clearImage = () => {
+  const handleClearImage = () => {
     if (inputRef.current) {
       inputRef.current.value = '';
     }
-
-  }
+  };
   useEffect(() => {
     if (state?.message === 'success') {
       revalidatePathClient();
@@ -64,11 +63,13 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
           <p className="text-sm text-muted-foreground">{title}</p>
         </div>
         <div className="flex items-start gap-4">
-          <div className="grid w-full items-center gap-1.5 relative">
+          <div className="relative grid w-full items-center gap-1.5">
             <Input ref={inputRef} id="cover" type="file" name="cover" />
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
-            <div className="absolute top-0 right-0 w-max items-center gap-1.5">
-              <Button variant="ghost" onClick={() => clearImage()} ><PlusIcon  className='text-foreground size-5 rotate-45'  /></Button>
+            <div className="absolute right-0 top-0 w-max items-center gap-1.5">
+              <Button variant="ghost" size="icon" onClick={handleClearImage}>
+                <PlusIcon className="size-5 rotate-45 text-foreground" />
+              </Button>
             </div>
           </div>
 
