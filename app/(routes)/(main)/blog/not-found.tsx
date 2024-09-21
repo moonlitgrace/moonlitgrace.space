@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import PencilIcon from "@/components/icons/pencil"
 import Link from "next/link"
 
-export default function Error() {
+export default function NotFound() {
   const pathname = usePathname()
 
   return (
@@ -15,10 +15,10 @@ export default function Error() {
       <IsometricHandler svg={<Svg404 />} />
       <div className="flex flex-col gap-2">
         <h2 className="text-3xl font-bold">
-          Page not found
+          Post not found
           <span className="text-primary">.</span>
         </h2>
-        <p className="text-muted-foreground">path: {pathname}</p>
+        <p className="text-muted-foreground">Requested post could not be found: {pathname}</p>
         <Link href="/blog">
           <Button className="w-max gap-2">See all Posts <PencilIcon variant="solid" className="size-3" /></Button>
         </Link>
