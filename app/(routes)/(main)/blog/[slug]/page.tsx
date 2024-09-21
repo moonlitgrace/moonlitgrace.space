@@ -8,15 +8,31 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import Markdown from '@/components/markdown';
 import TableOfContents from '@/app/_components/_main/table-of-contents';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { title, content, cover, slug, tag, createdAt } = (
-    await db.select().from(posts).where(eq(posts.slug, params.slug))
-  )[0];
+  const post = await db.select().from(posts).where(eq(posts.slug, params.slug)).then(result => result[0]);
+
+  if (!post) {
+    return {
+      title: 'Post not found',
+      description: 'The requested post could not be found.',
+      openGraph: {
+        title: 'Post not found',
+        description: 'The requested post could not be found.',
+        url: process.env.NEXT_PUBLIC_APP_URL + '/blog/' + params.slug,
+        siteName: 'Moonlitgrace',
+        locale: 'en_US',
+        type: 'article',
+      },
+    };
+  }
+
+  const { title, content, cover, slug, tag, createdAt } = post;
   const description = truncate(extractParagraphs(content), 160);
 
   // og: dynamic image
@@ -51,6 +67,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const postData: PostSelect = (
     await db.select().from(posts).where(eq(posts.slug, params.slug))
   )[0];
+
+  if (!postData) notFound();
 
   const lexer = new marked.Lexer();
   const tokens = lexer.lex(postData.content);
