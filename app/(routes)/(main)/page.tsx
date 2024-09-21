@@ -1,6 +1,6 @@
 import IsometricHandler from '@/components/isometric-handler';
 import { Metadata } from 'next';
-import MoonlitgraceSvg from '@/assets/svgs/moonlitgrace.svg'
+import MoonlitgraceSvg from '@/assets/svgs/moonlitgrace.svg';
 
 export const metadata: Metadata = {
   title: 'Moonlitgrace',

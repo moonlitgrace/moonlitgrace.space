@@ -15,7 +15,11 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await db.select().from(posts).where(eq(posts.slug, params.slug)).then(result => result[0]);
+  const post = await db
+    .select()
+    .from(posts)
+    .where(eq(posts.slug, params.slug))
+    .then((result) => result[0]);
 
   if (!post) {
     return {

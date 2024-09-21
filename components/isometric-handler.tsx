@@ -33,10 +33,7 @@ const IsometricHandler = ({ svg }: Props) => {
   }, [containerRef]);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full [&>svg]:overflow-visible"
-    >
+    <div ref={containerRef} className="w-full [&>svg]:overflow-visible">
       {svg}
     </div>
   );
