@@ -26,6 +26,7 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
   const [state, action] = useFormState(adminBlogSubmit, undefined);
   const [contentState, setContentState] = useState(content);
   const [showCoverClearBtn, setShowCoverClearBtn] = useState(false);
+
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const router = useRouter();
@@ -80,17 +81,16 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
                 name="cover"
                 onChange={handleCoverFileChange}
               />
-              {showCoverClearBtn && (
-                <Button
-                  type="button"
-                  className="absolute right-1.5 size-7"
-                  variant="secondary"
-                  size="icon"
-                  onClick={handleClearImage}
-                >
-                  <PlusIcon className="size-5 rotate-45 text-foreground" />
-                </Button>
-              )}
+              <Button
+                type="button"
+                className="absolute right-1.5 size-7"
+                variant="secondary"
+                size="icon"
+                onClick={handleClearImage}
+                disabled={!showCoverClearBtn}
+              >
+                <PlusIcon className="size-5 rotate-45 text-foreground" />
+              </Button>
             </div>
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
           </div>
