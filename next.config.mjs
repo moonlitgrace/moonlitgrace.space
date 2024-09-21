@@ -1,4 +1,7 @@
 import { withSentryConfig } from '@sentry/nextjs';
+import path from 'path';
+
+const __dirname = path.resolve()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,7 +18,7 @@ const nextConfig = {
             {
               loader: '@svgr/webpack',
               options: {
-                // disable svg optimization
+                // FIXME: only prevent removing element with id^="block"
                 svgo: false,
               },
             },
@@ -25,6 +28,22 @@ const nextConfig = {
       },
     },
   },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      include: path.resolve(__dirname, 'assets/svg'),
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            // FIXME: only prevent removing element with id^="block"
+            svgo: false,
+          },
+        },
+      ],
+    });
+    return config;
+  }
 };
 
 export default withSentryConfig(nextConfig, {
