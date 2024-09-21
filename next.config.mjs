@@ -1,4 +1,15 @@
 import { withSentryConfig } from '@sentry/nextjs';
+import path from 'path';
+
+const __dirname = path.resolve();
+
+const svgrLoaderConfig = {
+  loader: '@svgr/webpack',
+  options: {
+    // FIXME: only prevent removing element with id^="block"
+    svgo: false,
+  },
+};
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,19 +22,19 @@ const nextConfig = {
     turbo: {
       rules: {
         '*.svg': {
-          loaders: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                // disable svg optimization
-                svgo: false,
-              },
-            },
-          ],
+          loaders: [svgrLoaderConfig],
           as: '*.js',
         },
       },
     },
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      include: path.resolve(__dirname, 'assets/svg'),
+      use: [svgrLoaderConfig],
+    });
+    return config;
   },
 };
 
