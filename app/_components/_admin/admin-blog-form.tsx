@@ -68,7 +68,7 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
             <Input ref={inputRef} id="cover" type="file" name="cover" />
             <p className="text-sm text-muted-foreground">{cover ?? 'No cover provided'}</p>
             <div className="absolute top-0 right-0 w-max items-center gap-1.5">
-              <Button variant="ghost" onClick={() => clearImage()} ><PlusIcon className='text-foreground size-5 rotate-45'  /></Button>
+              <Button variant="ghost" onClick={() => clearImage()} ><PlusIcon  className='text-foreground size-5 rotate-45'  /></Button>
             </div>
           </div>
 
