@@ -1,5 +1,6 @@
-import MoonlitGraceArt from '@/app/_components/_main/moonlitgrace-art';
+import IsometricHandler from '@/components/isometric-handler';
 import { Metadata } from 'next';
+import MoonlitgraceSvg from '@/assets/svgs/moonlitgrace.svg';
 
 export const metadata: Metadata = {
   title: 'Moonlitgrace',
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="grid w-full place-items-center">
-      <MoonlitGraceArt />
+      <IsometricHandler svg={<MoonlitgraceSvg />} />
     </main>
   );
 }
