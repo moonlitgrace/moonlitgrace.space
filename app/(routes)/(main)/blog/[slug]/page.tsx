@@ -1,7 +1,5 @@
-import { db } from '@/db';
-import { posts, PostSelect } from '@/db/schema';
+import { PostSelect } from '@/db/schema';
 import { extractParagraphs, formatDate, truncate } from '@/lib/utils';
-import { eq } from 'drizzle-orm';
 import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -15,13 +13,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await db
-    .select()
-    .from(posts)
-    .where(eq(posts.slug, params.slug))
-    .then((result) => result[0]);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`);
 
-  if (!post) {
+  if (res.status === 404)
     return {
       title: 'Post not found',
       description: 'The requested post could not be found.',
@@ -34,7 +28,8 @@ export async function generateMetadata({
         type: 'article',
       },
     };
-  }
+
+  const post = await res.json().then((res) => res.data);
 
   const { title, content, cover, slug, tag, createdAt } = post;
   const description = truncate(extractParagraphs(content), 160);
@@ -68,11 +63,14 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const postData: PostSelect = (
-    await db.select().from(posts).where(eq(posts.slug, params.slug))
-  )[0];
-
-  if (!postData) notFound();
+  const postData: PostSelect = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`,
+  )
+    .then((res) => {
+      if (res.status === 404) notFound();
+      return res.json();
+    })
+    .then((res) => res.data);
 
   const lexer = new marked.Lexer();
   const tokens = lexer.lex(postData.content);

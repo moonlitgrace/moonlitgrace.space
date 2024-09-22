@@ -1,11 +1,9 @@
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { db } from '@/db';
-import { posts, PostSelect } from '@/db/schema';
+import { PostSelect } from '@/db/schema';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { desc } from 'drizzle-orm';
 
 export const metadata: Metadata = {
   title: 'Blog | Moonlitgrace',
@@ -23,17 +21,11 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const postsData: Omit<PostSelect, 'content' | 'cover'>[] = await db
-    .select({
-      id: posts.id,
-      title: posts.title,
-      slug: posts.slug,
-      tag: posts.tag,
-      createdAt: posts.createdAt,
-      draft: posts.draft,
-    })
-    .from(posts)
-    .orderBy(desc(posts.createdAt));
+  const posts: Omit<PostSelect, 'content' | 'cover'>[] = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/blog`,
+  )
+    .then((res) => res.json())
+    .then((res) => res.data);
 
   return (
     <>
@@ -42,7 +34,7 @@ export default async function BlogPage() {
         <span className="text-primary">.</span>
       </h2>
       <div className="flex flex-col gap-5">
-        {postsData
+        {posts
           .filter((post) => !post.draft)
           .map((post) => (
             <div key={post.id} className="flex flex-col">
