@@ -23,6 +23,7 @@ const nextConfig = {
       rules: {
         '*.svg': {
           loaders: [svgrLoaderConfig],
+          include: path.resolve(__dirname, 'assets/svg'),
           as: '*.js',
         },
       },

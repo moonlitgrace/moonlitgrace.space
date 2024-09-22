@@ -1,9 +1,30 @@
 import { db } from '@/db';
-import { posts } from '@/db/schema';
+import { posts, PostSelect } from '@/db/schema';
 import { AdminBlogData } from '@/zod_schemas/admin';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
+
+export async function GET(_request: NextRequest) {
+  try {
+    const postsData: Omit<PostSelect, 'content' | 'cover'>[] = await db
+      .select({
+        id: posts.id,
+        title: posts.title,
+        slug: posts.slug,
+        tag: posts.tag,
+        createdAt: posts.createdAt,
+        draft: posts.draft,
+      })
+      .from(posts)
+      .orderBy(desc(posts.createdAt));
+
+    return NextResponse.json({ data: postsData, message: 'success' });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ message: 'error' }, { status: 500 });
+  }
+}
 
 export async function POST(request: NextRequest) {
   const data: AdminBlogData = await request.json();
@@ -23,7 +44,7 @@ export async function POST(request: NextRequest) {
         })
         .where(eq(posts.id, data.id as number));
 
-      return NextResponse.json({ message: 'Success' });
+      return NextResponse.json({ message: 'success' });
     } else {
       await db.insert(posts).values({
         title: data.title,
@@ -34,22 +55,10 @@ export async function POST(request: NextRequest) {
         draft: data.draft,
       });
 
-      return NextResponse.json({ message: 'Success' });
+      return NextResponse.json({ message: 'success' });
     }
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ message: 'Data update failed' }, { status: 500 });
-  }
-}
-
-export async function DELETE(request: NextRequest) {
-  const data: { postId: string } = await request.json();
-
-  try {
-    await db.delete(posts).where(eq(posts.id, Number(data.postId)));
-    return NextResponse.json({ message: 'Deleted successfully!' });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ message: 'Deletion failed!' }, { status: 500 });
+    return NextResponse.json({ message: 'error' }, { status: 500 });
   }
 }

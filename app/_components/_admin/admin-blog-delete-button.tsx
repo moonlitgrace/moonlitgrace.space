@@ -17,15 +17,14 @@ import {
 import TrashIcon from '@/components/icons/trash';
 import SpinnerIcon from '@/components/icons/spinner';
 
-export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
+export default function AdminBlogDeleteButton({ postSlug }: { postSlug: string }) {
   const [pending, setPending] = useState(false);
 
   async function handleDeleteBlog() {
     setPending(true);
     try {
-      await fetch('/api/blog/', {
+      await fetch('/api/blog/' + postSlug, {
         method: 'DELETE',
-        body: JSON.stringify({ postId }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -54,7 +53,7 @@ export default function AdminBlogDeleteButton({ postId }: { postId: number }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete post (id={postId}) from
+            This action cannot be undone. This will permanently delete post ({postSlug}) from
             record.
           </AlertDialogDescription>
         </AlertDialogHeader>

@@ -1,4 +1,4 @@
-import { posts, PostSelect } from '@/db/schema';
+import { PostSelect } from '@/db/schema';
 import {
   Table,
   TableBody,
@@ -10,23 +10,15 @@ import {
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import AdminBlogDeleteButton from '@/app/_components/_admin/admin-blog-delete-button';
-
-import { desc } from 'drizzle-orm';
-import { db } from '@/db';
 import PencilIcon from '@/components/icons/pencil';
 import PlusIcon from '@/components/icons/plus';
 
 export default async function AdminBlogPage() {
-  const postsData: Omit<PostSelect, 'content' | 'cover' | 'createdAt'>[] = await db
-    .select({
-      id: posts.id,
-      title: posts.title,
-      slug: posts.slug,
-      tag: posts.tag,
-      draft: posts.draft,
-    })
-    .from(posts)
-    .orderBy(desc(posts.createdAt));
+  const posts: Omit<PostSelect, 'content' | 'cover'>[] = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/blog`,
+  )
+    .then((res) => res.json())
+    .then((res) => res.data);
 
   return (
     <>
@@ -52,7 +44,7 @@ export default async function AdminBlogPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {postsData.map((post) => (
+          {posts.map((post) => (
             <TableRow key={post.id}>
               <TableCell className="font-bold text-primary">{post.id}.</TableCell>
               <TableCell className="font-medium">
@@ -68,7 +60,7 @@ export default async function AdminBlogPage() {
                     <PencilIcon variant="outline" className="size-4" />
                   </Button>
                 </Link>
-                <AdminBlogDeleteButton postId={post.id} />
+                <AdminBlogDeleteButton postSlug={post.slug} />
               </TableCell>
             </TableRow>
           ))}
