@@ -4,9 +4,7 @@ import { createSession } from '@/app/_lib/session';
 import { AuthFormState, AuthSchema } from '@/zod_schemas/auth';
 import { redirect } from 'next/navigation';
 
-export async function login(state: AuthFormState, formData: FormData) {
-  console.log(state);
-
+export async function login(_state: AuthFormState, formData: FormData) {
   const { success, data, error } = AuthSchema.safeParse({
     username: formData.get('username'),
     password: formData.get('password'),

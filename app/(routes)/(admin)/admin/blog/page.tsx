@@ -68,7 +68,7 @@ export default async function AdminBlogPage() {
                     <PencilIcon variant="outline" className="size-4" />
                   </Button>
                 </Link>
-                <AdminBlogDeleteButton postId={post.id} />
+                <AdminBlogDeleteButton postSlug={post.slug} />
               </TableCell>
             </TableRow>
           ))}
