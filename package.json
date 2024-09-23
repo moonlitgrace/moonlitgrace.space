@@ -39,7 +39,7 @@
     "drizzle-orm": "^0.33.0",
     "highlight.js": "^11.10.0",
     "isomorphic-dompurify": "^2.15.0",
-    "jose": "^5.9.2",
+    "jose": "^5.9.3",
     "marked": "^14.1.2",
     "marked-highlight": "^2.1.4",
     "next": "^14.2.13",
