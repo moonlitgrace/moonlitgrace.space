@@ -12,6 +12,7 @@ const MarkdownEditor = ({ content, setContent }: Props) => {
   const [uploading, setUploading] = useState(false);
 
   const handleUpload = async (file: File) => {
+    if (!validateFile(file)) return;
     try {
       setUploading(true);
       const formData = new FormData();
@@ -32,13 +33,18 @@ const MarkdownEditor = ({ content, setContent }: Props) => {
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] as File;
-    if (validateFile(file)) handleUpload(file);
+    handleUpload(file);
   }
 
   function handleOnDrop(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     const file = e.dataTransfer?.files?.[0] as File;
-    if (validateFile(file)) handleUpload(file);
+    handleUpload(file);
+  }
+
+  function handleOnPaste(e: React.ClipboardEvent<HTMLTextAreaElement>) {
+    const file = e.clipboardData.files?.[0] as File;
+    handleUpload(file);
   }
 
   return (
@@ -54,6 +60,7 @@ const MarkdownEditor = ({ content, setContent }: Props) => {
         name="content"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        onPaste={handleOnPaste}
       />
       <div className="flex w-full items-center rounded-xl border border-dashed bg-muted/50 px-2 py-1">
         <input
