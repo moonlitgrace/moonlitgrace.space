@@ -11,16 +11,22 @@ interface Props {
 const MarkdownEditor = ({ content, setContent }: Props) => {
   const [uploading, setUploading] = useState(false);
 
-  const handleUpload = (file: File) => {
+  const handleUpload = async (file: File) => {
     try {
       setUploading(true);
-      setTimeout(() => {
-        const imgMarkdown = `![image](${file.name})`;
-        setContent((prev) => `${prev}\n${imgMarkdown}`);
-        setUploading(false);
-      }, 2000);
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/cloudinary', {
+        method: 'POST',
+        body: formData,
+      }).then((res) => res.json());
+
+      const imgMarkdown = `![image](${res.url})`;
+      setContent((prev) => `${prev}\n${imgMarkdown}`);
     } catch (err) {
       console.error('Error while uploading markdown file => ', err);
+    } finally {
+      setUploading(false);
     }
   };
 
