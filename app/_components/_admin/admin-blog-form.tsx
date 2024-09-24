@@ -3,7 +3,6 @@
 import adminBlogSubmit from '@/actions/admin';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useRef, ChangeEvent } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
@@ -12,6 +11,7 @@ import Markdown from '@/components/markdown';
 import { Checkbox } from '@/components/ui/checkbox';
 import { revalidatePathClient } from '@/helpers/revalidate-path-client';
 import PlusIcon from '@/components/icons/plus';
+import MarkdownEditor from '@/app/_components/_admin/markdown-editor';
 
 type Props = Partial<{
   id: number;
@@ -113,14 +113,7 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
               <TabsTrigger value="preview">Preview</TabsTrigger>
             </TabsList>
             <TabsContent value="content">
-              <Textarea
-                className="h-40"
-                placeholder="Type content here..."
-                id="content"
-                name="content"
-                value={contentState}
-                onChange={(e) => setContentState(e.target.value)}
-              />
+              <MarkdownEditor content={contentState} setContent={setContentState} />
             </TabsContent>
             <TabsContent value="preview">
               <div className="rounded-md border border-input p-3">
