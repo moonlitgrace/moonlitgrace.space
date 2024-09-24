@@ -1,11 +1,11 @@
 import SpinnerIcon from '@/components/icons/spinner';
 import { Textarea } from '@/components/ui/textarea';
 import { validateFile } from '@/lib/utils';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 
 interface Props {
   content: string | undefined;
-  setContent: Dispatch<SetStateAction<string | undefined>>;
+  setContent: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const MarkdownEditor = ({ content, setContent }: Props) => {
@@ -14,20 +14,33 @@ const MarkdownEditor = ({ content, setContent }: Props) => {
   const handleUpload = (file: File) => {
     try {
       setUploading(true);
-      console.log(file);
-      setTimeout(() => setUploading(false), 2000);
+      setTimeout(() => {
+        const imgMarkdown = `![image](${file.name})`;
+        setContent((prev) => `${prev}\n${imgMarkdown}`);
+        setUploading(false);
+      }, 2000);
     } catch (err) {
       console.error('Error while uploading markdown file => ', err);
     }
   };
 
-  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] as File;
     if (validateFile(file)) handleUpload(file);
   }
 
+  function handleOnDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+    const file = e.dataTransfer?.files?.[0] as File;
+    if (validateFile(file)) handleUpload(file);
+  }
+
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      onDrop={handleOnDrop}
+      onDragOver={(e) => e.preventDefault()}
+      className="flex flex-col gap-2"
+    >
       <Textarea
         className="h-40"
         placeholder="Type content here..."
