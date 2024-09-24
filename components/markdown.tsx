@@ -44,7 +44,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       </h${depth}>`;
     },
     code({ text, lang }) {
-      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button type='button' class='copy-code-btn'>Copy</button></div><div class='flex-1 overflow-x-scroll'><code>${text}</code></div></pre>`;
+      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button type='button' class='copy-code-btn'>Copy</button></div><div class='flex-1 overflow-x-scroll scrollbar-thin'><code>${text}</code></div></pre>`;
     },
     link(args) {
       const link = marked.Renderer.prototype.link.call(this, args);
