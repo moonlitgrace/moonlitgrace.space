@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.14.2",
-    "@next/env": "^14.2.13",
+    "@next/env": "^14.2.14",
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
