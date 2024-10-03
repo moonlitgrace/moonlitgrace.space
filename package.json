@@ -42,7 +42,7 @@
     "jose": "^5.9.3",
     "marked": "^14.1.2",
     "marked-highlight": "^2.1.4",
-    "next": "^14.2.13",
+    "next": "^14.2.14",
     "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18",
