@@ -44,7 +44,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       </h${depth}>`;
     },
     code({ text, lang }) {
-      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button type='button' class='copy-code-btn'>Copy</button></div><div class='flex-1 overflow-x-scroll scrollbar-thin'><code>${text}</code></div></pre>`;
+      return `<pre><div class='flex items-center justify-between pb-3 text-xs'><span>${lang}</span><button type='button' class='copy-code-btn'>Copy</button></div><div class='flex-1 overflow-x-scroll'><code>${text}</code></div></pre>`;
     },
     link(args) {
       const link = marked.Renderer.prototype.link.call(this, args);
@@ -63,7 +63,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
       langPrefix: 'hljs language-',
       highlight(code, lang) {
         let _lang = lang;
-        if (lang.includes('.')) _lang = lang.split('.')[1];
+        if (lang.includes('.')) _lang = lang.split('.').at(-1) as string;
         const language = hljs.getLanguage(_lang) ? _lang : 'plaintext';
         return hljs.highlight(code, { language }).value;
       },
@@ -79,7 +79,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
   return (
     <>
       <article
-        className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25"
+        className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:bg-secondary/25 prose-img:rounded-2xl"
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
             USE_PROFILES: { html: true },
