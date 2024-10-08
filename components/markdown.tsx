@@ -79,7 +79,7 @@ const Markdown = ({ markdown }: { markdown: string }) => {
   return (
     <>
       <article
-        className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:border prose-pre:bg-secondary/25 prose-img:rounded-2xl"
+        className="prose dark:prose-invert prose-pre:rounded-2xl prose-pre:border prose-pre:bg-background prose-img:rounded-2xl"
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(marked.parse(markdown) as string, {
             USE_PROFILES: { html: true },
