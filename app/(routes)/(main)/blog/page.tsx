@@ -59,7 +59,7 @@ export default async function BlogPage() {
                   <span className="text-xs font-bold uppercase text-muted-foreground">
                     {formatDate(post.createdAt)}
                   </span>
-                  <Badge className="hidden w-min capitalize md:flex">{post.tag}</Badge>
+                  <Badge className="flex w-min capitalize">{post.tag}</Badge>
                 </div>
                 <Link href={`/blog/${post.slug}`} className="relative text-xl font-bold underline">
                   {post.title}
