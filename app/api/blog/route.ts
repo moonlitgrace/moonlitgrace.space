@@ -5,19 +5,10 @@ import { desc, eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
 
-export async function GET(_request: NextRequest) {
+export async function GET(_req: NextRequest) {
+  console.log('API called');
   try {
-    const postsData: Omit<PostSelect, 'content' | 'cover'>[] = await db
-      .select({
-        id: posts.id,
-        title: posts.title,
-        slug: posts.slug,
-        tag: posts.tag,
-        createdAt: posts.createdAt,
-        draft: posts.draft,
-      })
-      .from(posts)
-      .orderBy(desc(posts.createdAt));
+    const postsData: PostSelect[] = await db.select().from(posts).orderBy(desc(posts.createdAt));
 
     return NextResponse.json({ data: postsData, message: 'success' });
   } catch (err) {
