@@ -45,7 +45,6 @@
     "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-masonry-css": "^1.0.16",
     "server-only": "^0.0.1",
     "slugify": "^1.6.6",
     "tailwind-gradient-mask-image": "^1.2.0",
