@@ -1,9 +1,9 @@
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { PostSelect } from '@/db/schema';
-import { formatDate } from '@/lib/utils';
+import { cn, extractParagraphs, formatDate, truncate } from '@/lib/utils';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Blog | Moonlitgrace',
@@ -21,9 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogPage() {
-  const posts: Omit<PostSelect, 'content' | 'cover'>[] = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/blog`,
-  )
+  const posts: PostSelect[] = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog`)
     .then((res) => res.json())
     .then((res) => res.data);
 
@@ -33,20 +31,42 @@ export default async function BlogPage() {
         Blog
         <span className="text-primary">.</span>
       </h2>
-      <div className="flex flex-col gap-5">
+      <div className="columns-1 gap-5 md:columns-2">
         {posts
           .filter((post) => !post.draft)
-          .map((post) => (
-            <div key={post.id} className="flex flex-col">
-              <span className="text-xs font-bold uppercase text-muted-foreground">
-                {formatDate(post.createdAt)}
-              </span>
-              <div className="flex items-center gap-4">
-                <Link href={`/blog/${post.slug}`} className="relative text-lg underline">
+          .map((post, idx) => (
+            <div
+              key={post.id}
+              className={cn(
+                idx !== 0 && 'mt-5',
+                'flex break-inside-avoid flex-col gap-5 rounded-3xl border p-5',
+              )}
+            >
+              {post.cover && (
+                <Image
+                  src={post.cover}
+                  alt={post.title}
+                  priority={true}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%', height: 'auto' }}
+                  className="rounded-2xl"
+                />
+              )}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase text-muted-foreground">
+                    {formatDate(post.createdAt)}
+                  </span>
+                  <Badge className="flex w-min capitalize">{post.tag}</Badge>
+                </div>
+                <Link href={`/blog/${post.slug}`} className="relative text-xl font-bold underline">
                   {post.title}
                 </Link>
-                <Separator className="hidden flex-1 md:flex" />
-                <Badge className="hidden w-min capitalize md:flex">{post.tag}</Badge>
+                <p className="text-sm text-muted-foreground">
+                  {truncate(extractParagraphs(post.content), 100)}
+                </p>
               </div>
             </div>
           ))}
