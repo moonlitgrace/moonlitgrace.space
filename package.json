@@ -15,7 +15,6 @@
     "db:generate": "drizzle-kit generate --config=./drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config=./drizzle.config.ts",
     "db:migrate:prod": "cross-env NODE_ENV=production dotenvx run -f .env.production.local -- drizzle-kit migrate --config=./drizzle.config.ts",
-    "db:seed": "dotenvx -f .env.development -- npx tsx ./db/seed/seed.ts",
     "db:studio": "drizzle-kit studio --config=./drizzle.config.ts",
     "prepare": "husky"
   },
