@@ -34,7 +34,7 @@
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.15",
     "class-variance-authority": "^0.7.0",
-    "cloudinary": "^2.5.0",
+    "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.34.1",
     "highlight.js": "^11.10.0",
