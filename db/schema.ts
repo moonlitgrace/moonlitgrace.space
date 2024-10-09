@@ -7,7 +7,7 @@ export const posts = pgTable('posts', {
   tag: text('tag').notNull(),
   cover: text('cover'),
   content: text('content').notNull(),
-  description: text('description').notNull().default('default:'),
+  description: text('description').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   draft: boolean('draft').notNull().default(false),
 });
