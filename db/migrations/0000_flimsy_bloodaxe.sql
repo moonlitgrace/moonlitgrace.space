@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS "posts" (
 	"tag" text NOT NULL,
 	"cover" text,
 	"content" text NOT NULL,
-	"description" text DEFAULT 'default:' NOT NULL,
+	"description" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"draft" boolean DEFAULT false NOT NULL
 );
