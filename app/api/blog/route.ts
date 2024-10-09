@@ -1,14 +1,26 @@
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
+import { extractParagraphs, truncate } from '@/app/_lib/utils';
 import { AdminBlogData } from '@/zod_schemas/admin';
 import { desc, eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
 
-export async function GET(_req: NextRequest) {
-  console.log('API called');
+export async function GET(_request: NextRequest) {
   try {
-    const postsData: PostSelect[] = await db.select().from(posts).orderBy(desc(posts.createdAt));
+    const postsData: Omit<PostSelect, 'content'>[] = await db
+      .select({
+        id: posts.id,
+        title: posts.title,
+        slug: posts.slug,
+        tag: posts.tag,
+        cover: posts.cover,
+        description: posts.description,
+        createdAt: posts.createdAt,
+        draft: posts.draft,
+      })
+      .from(posts)
+      .orderBy(desc(posts.createdAt));
 
     return NextResponse.json({ data: postsData, message: 'success' });
   } catch (err) {
@@ -29,6 +41,7 @@ export async function POST(request: NextRequest) {
           title: data.title,
           tag: data.tag,
           content: data.content,
+          description: truncate(extractParagraphs(data.content), 160),
           slug: slugify(data.title.toLowerCase()),
           ...(data.cover && { cover: data.cover }),
           draft: data.draft,
@@ -41,6 +54,7 @@ export async function POST(request: NextRequest) {
         title: data.title,
         tag: data.tag,
         content: data.content,
+        description: truncate(extractParagraphs(data.content), 160),
         slug: slugify(data.title.toLowerCase()),
         ...(data.cover && { cover: data.cover }),
         draft: data.draft,

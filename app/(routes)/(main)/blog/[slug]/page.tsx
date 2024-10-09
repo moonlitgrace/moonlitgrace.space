@@ -1,5 +1,5 @@
 import { PostSelect } from '@/db/schema';
-import { extractParagraphs, formatDate, truncate } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import { marked, Tokens } from 'marked';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -29,10 +29,10 @@ export async function generateMetadata({
       },
     };
 
-  const post = await res.json().then((res) => res.data);
-
-  const { title, content, cover, slug, tag, createdAt } = post;
-  const description = truncate(extractParagraphs(content), 160);
+  const post: Omit<PostSelect, 'id' | 'draft' | 'content'> = await res
+    .json()
+    .then((res) => res.data);
+  const { title, description, cover, slug, tag, createdAt } = post;
 
   // og: dynamic image
   const ogImgUrl = new URL(process.env.NEXT_PUBLIC_APP_URL + '/api/og');
@@ -63,9 +63,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const postData: PostSelect = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`,
-  )
+  const post: PostSelect = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`)
     .then((res) => {
       if (res.status === 404) notFound();
       return res.json();
@@ -73,7 +71,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     .then((res) => res.data);
 
   const lexer = new marked.Lexer();
-  const tokens = lexer.lex(postData.content);
+  const tokens = lexer.lex(post.content);
   const headings = tokens
     .filter((token) => token.type === 'heading')
     .map((token) => (token as Tokens.Heading).text);
@@ -82,14 +80,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <>
       <div className="flex w-full flex-col items-center gap-5">
         <h4 className="text-xs font-bold uppercase text-muted-foreground">
-          {formatDate(postData.createdAt)}
+          {formatDate(post.createdAt)}
         </h4>
-        <h1 className="text-center text-4xl font-black leading-snug">{postData.title}</h1>
-        <Badge className="capitalize">{postData.tag}</Badge>
-        {postData.cover && (
+        <h1 className="text-center text-4xl font-black leading-snug">{post.title}</h1>
+        <Badge className="capitalize">{post.tag}</Badge>
+        {post.cover && (
           <Image
-            src={postData.cover}
-            alt={postData.title}
+            src={post.cover}
+            alt={post.title}
             priority={true}
             width={0}
             height={0}
@@ -99,7 +97,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         )}
       </div>
-      <Markdown markdown={postData.content} />
+      <Markdown markdown={post.content} />
       {headings.length > 0 && <TableOfContents headings={headings} />}
     </>
   );

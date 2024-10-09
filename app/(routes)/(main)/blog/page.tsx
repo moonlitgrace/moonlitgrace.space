@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { PostSelect } from '@/db/schema';
-import { cn, extractParagraphs, formatDate, truncate } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -64,9 +64,7 @@ export default async function BlogPage() {
                 <Link href={`/blog/${post.slug}`} className="relative text-xl font-bold underline">
                   {post.title}
                 </Link>
-                <p className="text-sm text-muted-foreground">
-                  {truncate(extractParagraphs(post.content), 100)}
-                </p>
+                <p className="text-sm text-muted-foreground">{post.description}</p>
               </div>
             </div>
           ))}
