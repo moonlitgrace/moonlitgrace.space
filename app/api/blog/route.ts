@@ -1,12 +1,12 @@
 import { db } from '@/db';
 import { posts, PostSelect } from '@/db/schema';
-import { extractParagraphs, truncate } from '@/lib/utils';
+import { extractParagraphs, truncate } from '@/app/_lib/utils';
 import { AdminBlogData } from '@/zod_schemas/admin';
 import { desc, eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
 
-export async function GET(_req: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const postsData: Omit<PostSelect, 'content'>[] = await db
       .select({

@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { marked, Tokens } from 'marked';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -27,22 +26,6 @@ export function stripHtmlTags(html: string) {
   return html.replace(/<[^>]*>/g, '');
 }
 
-export function extractParagraphs(markdown: string) {
-  const tokens = marked.lexer(markdown);
-  const paragraphs = tokens
-    .filter((token) => token.type === 'paragraph')
-    .map((token) => {
-      const rawText = marked.parseInline((token as Tokens.Paragraph).text, { async: false });
-      return stripHtmlTags(rawText);
-    });
-  return paragraphs.join(' ');
-}
-
-export function truncate(str: string, n: number) {
-  return str.length > n ? str.slice(0, n - 3) + '...' : str;
-}
-
-// TODO: add test for this function
 export function arrayBufferToBase64(buffer: ArrayBuffer): string {
   let binary = '';
   const bytes = new Uint8Array(buffer);
