@@ -4,10 +4,11 @@ import { eq } from 'drizzle-orm';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface RestProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function GET(_request: NextRequest, { params }: RestProps) {
+export async function GET(_request: NextRequest, props: RestProps) {
+  const params = await props.params;
   try {
     const post = await db
       .select()
@@ -26,7 +27,8 @@ export async function GET(_request: NextRequest, { params }: RestProps) {
   }
 }
 
-export async function DELETE(_request: NextRequest, { params }: RestProps) {
+export async function DELETE(_request: NextRequest, props: RestProps) {
+  const params = await props.params;
   try {
     await db.delete(posts).where(eq(posts.slug, params.slug));
     return NextResponse.json({ message: 'success' });
