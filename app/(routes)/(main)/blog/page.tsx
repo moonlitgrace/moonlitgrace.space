@@ -43,16 +43,15 @@ export default async function BlogPage() {
               )}
             >
               {post.cover && (
-                <Image
-                  src={post.cover}
-                  alt={post.title}
-                  priority={true}
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{ width: '100%', height: 'auto' }}
-                  className="rounded-2xl"
-                />
+                <div className="relative aspect-video h-auto w-full">
+                  <Image
+                    src={post.cover}
+                    alt={post.title}
+                    priority={true}
+                    fill
+                    className="rounded-2xl"
+                  />
+                </div>
               )}
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
