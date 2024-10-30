@@ -21,6 +21,7 @@ const languages = {
   json: () => import('highlight.js/lib/languages/json'),
   scss: () => import('highlight.js/lib/languages/scss'),
   yaml: () => import('highlight.js/lib/languages/yaml'),
+  svelte: () => import('highlight.svelte'),
 };
 
 async function registerLanguages() {
