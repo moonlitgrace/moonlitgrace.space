@@ -1,9 +1,5 @@
-import dynamic from 'next/dynamic';
+import AdminBar from '@/app/_components/_admin/admin-bar';
 import React from 'react';
-
-const DynamicAdminBar = dynamic(() => import('@/app/_components/_admin/admin-bar'), {
-  ssr: false,
-});
 
 export default function ProtectedLayout({
   children,
@@ -12,7 +8,7 @@ export default function ProtectedLayout({
 }>) {
   return (
     <div className="mb-40 mt-10 flex w-full flex-col gap-10 md:mb-10">
-      <DynamicAdminBar />
+      <AdminBar />
       {children}
     </div>
   );

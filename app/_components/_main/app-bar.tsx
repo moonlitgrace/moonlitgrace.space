@@ -4,20 +4,16 @@ import Link from 'next/link';
 import HomeIcon from '@/components/icons/home';
 import { usePathname } from 'next/navigation';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import PencilIcon from '@/components/icons/pencil';
 import GithubIcon from '@/components/icons/github';
 import MailIcon from '@/components/icons/mail';
-import { Separator } from '@/components/ui/separator';
-import { useScreenDevice } from '@/hooks/use-screen-device';
-import { cn } from '@/lib/utils';
+import { ResponsiveSeparator, ResponsiveTooltipContent } from '@/app/_components/responsive';
 
 const AppBar = () => {
   const pathname = usePathname();
-
-  const { isMobile } = useScreenDevice();
 
   const MAPPING = {
     links: {
@@ -65,15 +61,10 @@ const AppBar = () => {
                 </Link>
               </Button>
             </TooltipTrigger>
-            <TooltipContent sideOffset={15} side={isMobile ? 'top' : 'right'}>
-              <p>{item.label}</p>
-            </TooltipContent>
+            <ResponsiveTooltipContent content={item.label} />
           </Tooltip>
         ))}
-        <Separator
-          orientation={isMobile ? 'vertical' : 'horizontal'}
-          className={cn(isMobile ? 'h-5' : 'h-px w-1/2')}
-        />
+        <ResponsiveSeparator />
         {Object.values(MAPPING.socials).map((item, idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
@@ -91,9 +82,7 @@ const AppBar = () => {
                 </a>
               </Button>
             </TooltipTrigger>
-            <TooltipContent sideOffset={15} side={isMobile ? 'top' : 'right'}>
-              <p>{item.label}</p>
-            </TooltipContent>
+            <ResponsiveTooltipContent content={item.label} />
           </Tooltip>
         ))}
       </div>
