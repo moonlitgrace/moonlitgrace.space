@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     const uploadRes = await cloudinary.uploader.upload(base64Image);
 
-    return NextResponse.json({ url: uploadRes.url });
+    return NextResponse.json({ url: uploadRes.secure_url });
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json({ message: error.message }, { status: 500 });
