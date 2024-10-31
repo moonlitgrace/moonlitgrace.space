@@ -4,8 +4,7 @@ import adminBlogSubmit from '@/actions/admin';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useRef, ChangeEvent } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect, useState, useRef, ChangeEvent, useActionState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Markdown from '@/components/markdown';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -23,7 +22,8 @@ type Props = Partial<{
 }>;
 
 export default function AdminBlogForm({ id, title, tag, content, cover, draft = false }: Props) {
-  const [state, action] = useFormState(adminBlogSubmit, undefined);
+  const [state, action, isPending] = useActionState(adminBlogSubmit, undefined);
+
   const [contentState, setContentState] = useState(content);
   const [showCoverClearBtn, setShowCoverClearBtn] = useState(false);
 
@@ -134,18 +134,11 @@ export default function AdminBlogForm({ id, title, tag, content, cover, draft = 
               Save as Draft
             </label>
           </div>
-          <SubmitButton />
+          <Button className="w-full" disabled={isPending}>
+            {isPending ? 'Submitting...' : 'Submit'}
+          </Button>
         </div>
       </form>
     </>
-  );
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button className="w-full" disabled={pending}>
-      {pending ? 'Submitting...' : 'Submit'}
-    </Button>
   );
 }
