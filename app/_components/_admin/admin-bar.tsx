@@ -3,17 +3,15 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import PencilIcon from '@/components/icons/pencil';
-import { useScreenDevice } from '@/hooks/use-screen-device';
 import HomeIcon from '@/components/icons/home';
+import { ResponsiveTooltipContent } from '@/app/_components/responsive';
 
 const AdminBar = () => {
   const pathname = usePathname();
-
-  const { isMobile } = useScreenDevice();
 
   const MAPPING = {
     links: {
@@ -49,9 +47,7 @@ const AdminBar = () => {
                 </Link>
               </Button>
             </TooltipTrigger>
-            <TooltipContent sideOffset={15} side={isMobile ? 'top' : 'right'}>
-              <p>{item.label}</p>
-            </TooltipContent>
+            <ResponsiveTooltipContent content={item.label} />
           </Tooltip>
         ))}
       </div>

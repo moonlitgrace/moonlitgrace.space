@@ -8,11 +8,10 @@ import Markdown from '@/components/markdown';
 import TableOfContents from '@/app/_components/_main/table-of-contents';
 import { notFound } from 'next/navigation';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`);
 
   if (res.status === 404)
@@ -62,7 +61,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const post: PostSelect = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`)
     .then((res) => {
       if (res.status === 404) notFound();

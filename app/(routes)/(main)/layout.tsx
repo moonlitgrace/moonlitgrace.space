@@ -1,9 +1,5 @@
-import dynamic from 'next/dynamic';
+import AppBar from '@/app/_components/_main/app-bar';
 import React from 'react';
-
-const DynamicAppBar = dynamic(() => import('@/app/_components/_main/app-bar'), {
-  ssr: false,
-});
 
 export default function MainLayout({
   children,
@@ -13,7 +9,7 @@ export default function MainLayout({
   return (
     <>
       {children}
-      <DynamicAppBar />
+      <AppBar />
     </>
   );
 }

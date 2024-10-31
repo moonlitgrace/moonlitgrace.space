@@ -2,7 +2,8 @@ import AdminBlogForm from '@/app/_components/_admin/admin-blog-form';
 import { PostSelect } from '@/db/schema';
 import { notFound } from 'next/navigation';
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const post: Omit<PostSelect, 'createdAt'> = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${params.slug}`,
   )
