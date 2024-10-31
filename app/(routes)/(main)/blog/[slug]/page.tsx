@@ -91,6 +91,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             priority={true}
             width={0}
             height={0}
+            sizes="100vw"
             style={{ width: '100%', height: 'auto' }}
             className="rounded-2xl"
           />
