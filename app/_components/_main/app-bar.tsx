@@ -53,7 +53,7 @@ const AppBar = () => {
                 variant={pathname === item.href ? 'default' : 'ghost'}
                 className={'grid aspect-square size-11 place-items-center rounded-xl'}
               >
-                <Link href={item.href} aria-label={`Goto ${item.label}page`}>
+                <Link href={item.href} aria-label={`Goto ${item.label} page`}>
                   {React.createElement(item.icon, {
                     variant: pathname === item.href ? 'solid' : 'outline',
                     className: 'size-5',
