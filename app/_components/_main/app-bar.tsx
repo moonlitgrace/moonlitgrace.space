@@ -53,7 +53,7 @@ const AppBar = () => {
                 variant={pathname === item.href ? 'default' : 'ghost'}
                 className={'grid aspect-square size-11 place-items-center rounded-xl'}
               >
-                <Link href={item.href}>
+                <Link href={item.href} aria-label={`Goto ${item.label} page`}>
                   {React.createElement(item.icon, {
                     variant: pathname === item.href ? 'solid' : 'outline',
                     className: 'size-5',
@@ -74,7 +74,7 @@ const AppBar = () => {
                 variant={'ghost'}
                 className={'grid aspect-square size-11 place-items-center rounded-xl'}
               >
-                <a href={item.url} target="_blank">
+                <a href={item.url} target="_blank" aria-label={item.label}>
                   {React.createElement(item.icon, {
                     variant: 'outline',
                     className: 'size-5',
