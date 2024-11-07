@@ -45,7 +45,7 @@ const AppBar = () => {
   return (
     <TooltipProvider delayDuration={500}>
       <div className="fixed bottom-10 left-1/2 z-20 flex -translate-x-1/2 transform items-center gap-2 rounded-2xl border bg-background p-2 md:bottom-auto md:left-10 md:top-1/2 md:-translate-y-1/2 md:flex-col">
-        {Object.values(MAPPING.links).map((item, idx) => (
+        {Object.entries(MAPPING.links).map(([verb, item], idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
               <Button
@@ -53,7 +53,7 @@ const AppBar = () => {
                 variant={pathname === item.href ? 'default' : 'ghost'}
                 className={'grid aspect-square size-11 place-items-center rounded-xl'}
               >
-                <Link href={item.href}>
+                <Link href={item.href} aria-label={`Goto ${verb} page`}>
                   {React.createElement(item.icon, {
                     variant: pathname === item.href ? 'solid' : 'outline',
                     className: 'size-5',
@@ -65,7 +65,7 @@ const AppBar = () => {
           </Tooltip>
         ))}
         <ResponsiveSeparator />
-        {Object.values(MAPPING.socials).map((item, idx) => (
+        {Object.entries(MAPPING.socials).map(([verb, item], idx) => (
           <Tooltip key={idx}>
             <TooltipTrigger asChild>
               <Button
@@ -74,7 +74,7 @@ const AppBar = () => {
                 variant={'ghost'}
                 className={'grid aspect-square size-11 place-items-center rounded-xl'}
               >
-                <a href={item.url} target="_blank">
+                <a href={item.url} target="_blank" aria-label={`Check ${verb}`}>
                   {React.createElement(item.icon, {
                     variant: 'outline',
                     className: 'size-5',

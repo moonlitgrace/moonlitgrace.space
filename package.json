@@ -39,7 +39,7 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.35.1",
     "highlight.js": "^11.10.0",
-    "highlight.svelte": "^0.0.5",
+    "highlight.svelte": "^0.0.4",
     "isomorphic-dompurify": "^2.16.0",
     "jose": "^5.9.4",
     "marked": "^14.1.3",
