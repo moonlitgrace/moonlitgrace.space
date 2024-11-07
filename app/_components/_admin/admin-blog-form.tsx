@@ -24,7 +24,7 @@ type Props = Partial<{
 export default function AdminBlogForm({ id, title, tag, content, cover, draft = false }: Props) {
   const [state, action, isPending] = useActionState(adminBlogSubmit, undefined);
 
-  const [contentState, setContentState] = useState(content);
+  const [contentState, setContentState] = useState(content ?? '');
   const [showCoverClearBtn, setShowCoverClearBtn] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
